@@ -1,0 +1,20 @@
+# install script for dotbot
+# pip install dotbot
+
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+
+- clean: ['~']
+- clean:
+    ~/.config:
+      force: true
+
+- link:
+    ~/.ssh:
+    ~/bin: bin
+    ~/.zhistory:
+    ~/.bash_history:
+    ~/.fasd:
