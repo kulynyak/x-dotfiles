@@ -20,6 +20,8 @@
     ~/.fasd:
     ~/dots/zprezto:
       path: ~/.zprezto
+    ~/dots/hammerspoon:
+      path: ~/.hammerspoon  
     ~/.kube/config:  
       path: kube/config
 - shell:
