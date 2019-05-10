@@ -6,12 +6,12 @@
 #
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+if [[ ("$SHLVL" -eq 1 && ! -o LOGIN) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-if [ -f "${HOME}/.profile" ] ; then
-	source ${HOME}/.profile
+if [ -f "${HOME}/.profile" ]; then
+  source ${HOME}/.profile
 fi
 
 # Temporary Files

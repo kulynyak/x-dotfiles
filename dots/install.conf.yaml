@@ -18,6 +18,8 @@
     ~/.zhistory:
     ~/.bash_history:
     ~/.fasd:
+    ~/dots/nvim:
+      path: ~/.config/nvim     
     ~/.tmux.conf:
       path: ~/dots/tmux/.tmux.conf      
     ~/dots/zprezto:
