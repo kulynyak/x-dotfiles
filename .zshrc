@@ -33,7 +33,7 @@ function take() {
   [ $# -eq 1 ] && mkdir "$1" && cd "$1"
 }
 
-if (($+commands[fasd])) ; then
+if (($+commands[fasd])); then
   alias f='fasd -f'
   # interactive file selection
   alias sf='fasd -sif'
@@ -54,37 +54,14 @@ eval $(thefuck --alias zz)
 # reload zsh configuration
 alias zreload='exec zsh'
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  # alias ssh='ssh -oKexAlgorithms=+diffie-hellman-group1-sha1'
-  alias ossh='/usr/bin/ssh'
-  # Show/Hide Hidden Files mac OS X
-  alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app > /dev/null 2>&1'
-  alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.appi >/dev/null 2>&1'
-  # MELD
-  # alias meld='open -a Meld --args'
-  # alias meldw='open -W -a Meld --args'
-  # P4Merge
-  # alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
+if [[ "$OSTYPE" == "darwin"* ]]; then
   # OPEN FILE
   alias -s html=open
   alias -s pdf=open
-  # OPEN FOLDER
-  alias n='open .'
-  alias simulator='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
-  function pfd() {
-    osascript 2>/dev/null <<EOF
-      tell application "Finder"
-        return POSIX path of (target of first window as text)
-      end tell
-EOF
-  }
-fi
-if [ "$__OS__" = "Linux" ]; then
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
   # OPEN FILE
   alias -s html=firefox
   alias -s pdf=evince
-  # OPEN FOLDER
-  alias n='nautilus'
 fi
 
 bindkey -e

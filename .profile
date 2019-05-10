@@ -131,6 +131,25 @@ alias gw='./gradlew'
 
 alias ip='ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '\''{print $2}'\'
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Show/Hide Hidden Files mac OS X
+  alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app > /dev/null 2>&1'
+  alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.appi >/dev/null 2>&1'
+  # OPEN FOLDER
+  alias n='open .'
+  alias simulator='open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
+  function pfd() {
+    osascript 2>/dev/null <<EOF
+      tell application "Finder"
+        return POSIX path of (target of first window as text)
+      end tell
+EOF
+  }
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+  # OPEN FOLDER
+  alias n='nautilus'
+fi
+
 function fn() {
   find . -name "$1" -print 2>&1 | grep -v -Ei 'Operation not permitted|Permission denied|Not a directory'
 }
