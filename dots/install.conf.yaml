@@ -18,3 +18,11 @@
     ~/.zhistory:
     ~/.bash_history:
     ~/.fasd:
+
+- shell:
+  -
+    command: if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"; fi
+    stdout: true
+    stderr: true
+    description: Install zpresto
+    quiet: false
