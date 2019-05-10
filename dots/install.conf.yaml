@@ -20,6 +20,8 @@
     ~/.fasd:
     ~/dots/zprezto:
       path: ~/.zprezto
+    ~/.kube/config:  
+      path: kube/config
 - shell:
   -
     command: if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"; fi
