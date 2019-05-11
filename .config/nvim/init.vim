@@ -8,6 +8,11 @@ endif
 " ---------------
 set ruler          " Ruler on
 set number         " Line numbers on
+
+" turn hybrid line numbers on
+set number relativenumber
+set nu rnu
+
 set nowrap         " Line wrapping off
 set laststatus=2   " Always show the statusline
 set cmdheight=2    " Make the command area two lines high
