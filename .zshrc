@@ -187,7 +187,7 @@ export CLICOLOR=true
 [ -f ~/github/zsh/alias-tips/alias-tips.plugin.zsh ] && source ~/github/zsh/alias-tips/alias-tips.plugin.zsh
 [ -f ~/github/zsh/ra-git.zsh/ra-git.plugin.zsh ] && source ~/github/zsh/ra-git.zsh/ra-git.plugin.zsh
 
-[ -f ~/github/zsh/ra-mvn.zsh/ra-mvn.plugin.zsh ] && ~/github/zsh/ra-mvn.zsh/ra-mvn.plugin.zsh
+# [ -f ~/github/zsh/ra-mvn.zsh/ra-mvn.plugin.zsh ] && ~/github/zsh/ra-mvn.zsh/ra-mvn.plugin.zsh
 
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+# if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 export PATH="/usr/local/opt/apr/bin:$PATH"
