@@ -19,19 +19,20 @@
     ~/.bash_history:
     ~/.fasd:
     ~/dots/nvim:
-      path: ~/.config/nvim     
+      path: ~/.config/nvim
     ~/.tmux.conf:
-      path: ~/dots/tmux/.tmux.conf      
+      path: ~/dots/tmux/.tmux.conf
     ~/dots/zprezto:
       path: ~/.zprezto
     ~/dots/hammerspoon:
-      path: ~/.hammerspoon  
-    ~/.kube/config:  
-      path: kube/config 
-- shell:
-  -
-    command: if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"; fi
-    stdout: true
-    stderr: true
-    description: Install zpresto
-    quiet: false
+      path: ~/.hammerspoon
+    ~/.kube/config:
+      path: kube/config
+
+# - shell:
+#   -
+#     command: if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"; fi
+#     stdout: true
+#     stderr: true
+#     description: Install zpresto
+#     quiet: false
