@@ -134,5 +134,15 @@ alias x='exit'
 alias df='df -kh'
 alias du='du -kh'
 
+# Use bash-completion, if available
+[[ $PS1 && -f /usr/local/etc/profile.d/bash_completion.sh ]] && \
+    . /usr/local/etc/profile.d/bash_completion.sh
+
+if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+  GIT_PROMPT_ONLY_IN_REPO=1
+  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+fi
+
 # The last line
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
