@@ -13,6 +13,8 @@
       force: true
 
 - link:
+    ~/.profile:
+      path: ~/.bashrc
     ~/.ssh:
     ~/bin: bin
     ~/.zhistory:
