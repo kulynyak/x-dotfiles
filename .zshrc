@@ -14,7 +14,6 @@ fi
 
 autoload -U add-zsh-hook
 
-# aliases
 # aliases definition
 alias rm='trash'
 alias vim='nvim'
@@ -24,6 +23,9 @@ alias history='fc -l 1'
 alias md='mkdir -p'
 alias pgrep="pgrep -f"
 alias pkill="pkill -9 -f"
+
+# env
+alias env='env "$@" | sort'
 
 # share folder
 alias wshare='python3 -m http.server'

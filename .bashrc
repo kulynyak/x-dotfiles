@@ -1,4 +1,3 @@
-
 PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
 
 # Java
@@ -87,7 +86,12 @@ fi
 # the last one
 export PATH
 
-# dotfiles related
-alias dotfiles="/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+# dotfiles
+alias dfs="/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dfss="dfs status"
+alias dfsc='dfs commit -m "$(date -u)" && dfs push'
+dfsa() {
+    dfs add $(dfs status | grep modified | sed 's/\(.*modified:\s*\)//')
+}
 DOTS_BKP="$HOME/Dropbox/sync.dotfiles"
 alias dotbot="dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP"
