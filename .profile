@@ -1,4 +1,3 @@
-export __OS__=$(uname)
 unset PATH
 
 PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
