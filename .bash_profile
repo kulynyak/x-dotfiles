@@ -15,10 +15,10 @@ PROMPT_DIRTRIM=2
 bind Space:magic-space
 
 # Turn on recursive globbing (enables ** to recurse all directories)
-shopt -s globstar 2> /dev/null
+shopt -s globstar 2>/dev/null
 
 # Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob;
+shopt -s nocaseglob
 
 ## SMARTER TAB-COMPLETION (Readline bindings) ##
 
@@ -70,11 +70,11 @@ bind '"\e[D": backward-char'
 ## BETTER DIRECTORY NAVIGATION ##
 
 # Prepend cd to directory names automatically
-shopt -s autocd 2> /dev/null
+shopt -s autocd 2>/dev/null
 # Correct spelling errors during tab-completion
-shopt -s dirspell 2> /dev/null
+shopt -s dirspell 2>/dev/null
 # Correct spelling errors in arguments supplied to cd
-shopt -s cdspell 2> /dev/null
+shopt -s cdspell 2>/dev/null
 
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
@@ -130,18 +130,49 @@ alias rd='rmdir'
 alias rm='trash'
 alias x='exit'
 
+# Homebrew
+alias brewc='brew cleanup'
+alias brewC='brew cleanup --force'
+alias brewi='brew install'
+alias brewl='brew list'
+alias brewo='brew outdated'
+alias brews='brew search'
+alias brewu='brew upgrade'
+alias brewx='brew uninstall'
+
+# Homebrew Cask
+alias cask='brew cask'
+alias caskc='brew cask cleanup'
+alias caskC='brew cask cleanup'
+alias caski='brew cask install'
+alias caskl='brew cask list'
+alias casko='brew cask outdated'
+alias casks='brew cask search'
+alias caskx='brew cask uninstall'
+
+up() {
+    brew update
+    brew upgrade
+    brew cleanup
+    ls -G -l /usr/local/Homebrew/Library/Homebrew | grep homebrew-cask | awk '{print $9}' | \
+    for evil_symlink in $(cat -); do
+        trash -v /usr/local/Homebrew/Library/Homebrew/$evil_symlink
+    done
+    brew doctor
+}
+
 # Resource Usage
 alias df='df -kh'
 alias du='du -kh'
 
 # Use bash-completion, if available
-[[ $PS1 && -f /usr/local/etc/profile.d/bash_completion.sh ]] && \
+[[ $PS1 && -f /usr/local/etc/profile.d/bash_completion.sh ]] &&
     . /usr/local/etc/profile.d/bash_completion.sh
 
 if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-  GIT_PROMPT_ONLY_IN_REPO=1
-  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+    __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 fi
 
 # The last line
