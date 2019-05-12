@@ -93,5 +93,7 @@ alias dfsc='dfs commit -m "$(date -u)" && dfs push'
 dfsa() {
     dfs add $(dfs status | grep modified | sed 's/\(.*modified:\s*\)//')
 }
+alias dfsl="dfs ls-tree -r master --name-only"
+alias dfsla="dfs log --pretty=format: --name-only --diff-filter=A | sort - | sed '/^$/d'"
 DOTS_BKP="$HOME/Dropbox/sync.dotfiles"
 alias dotbot="dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP"
