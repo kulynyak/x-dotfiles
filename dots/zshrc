@@ -804,5 +804,7 @@ function sshlist() {
 
 export ZSH_PLUGINS_ALIAS_TIPS_TEXT="📌 Alias: "
 export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ c"
-export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=0
+export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 [ ~/github/zsh/alias-tips/alias-tips.plugin.zsh ] && source ~/github/zsh/alias-tips/alias-tips.plugin.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
