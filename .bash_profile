@@ -123,7 +123,6 @@ alias sl='ls -G'         # I often screw this up.
 
 # Utils
 alias diffu="diff --unified"
-alias env='env "$@" | sort'
 alias md='mkdir -p'
 alias o='open'
 alias rd='rmdir'

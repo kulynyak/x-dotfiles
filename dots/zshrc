@@ -1,0 +1,809 @@
+# fix for tmux on macOS Sierra
+#export EVENT_NOKQUEUE=1
+
+autoload colors
+colors
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
+export CLICOLOR=true
+
+# add sudo before command with alt+s, esc+esc
+function prepend-sudo() {
+  [[ -z $BUFFER ]] && zle up-history
+  if [[ $BUFFER == sudo\ * ]]; then
+    LBUFFER="${LBUFFER#sudo }"
+  else
+    LBUFFER="sudo $LBUFFER"
+  fi
+}
+zle -N prepend-sudo
+bindkey "\e\e" prepend-sudo # Defined shortcut keys: [Esc] [Esc]
+bindkey "^[s" prepend-sudo # Defined shortcut keys: [Alt-s]
+
+# global aliases
+globalias() {
+   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+     zle _expand_alias
+     zle expand-word
+   fi
+   zle self-insert
+}
+zle -N globalias
+bindkey " " globalias
+bindkey "^ " magic-space           # control-space to bypass completion
+bindkey -M isearch " " magic-space # normal space during searches
+alias -g G='|& grep -E -i'
+alias -g L="| less"
+alias -g X='| xargs'
+alias -g X0='| xargs -0'
+alias -g C='| wc -l'
+alias -g A='| awk'
+alias -g H='| head -n $(($LINES-5))'
+alias -g T='| tail -n $(($LINES-5))'
+alias -g S='| sed'
+alias -g N='&> /dev/null'
+alias -g XC='&> xclip -i -sel c'
+alias -g NF="./*(oc[1])" # last modified(inode time) file or directory
+
+# foreground jobs
+function foreground-current-job() {
+  fg
+}
+zle -N foreground-current-job
+bindkey -M emacs '^z' foreground-current-job
+
+# editor
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+
+# browser
+if [[ "$OSTYPE" == darwin* ]]; then
+    export BROWSER='open'
+fi
+
+#
+# aliases
+#
+
+# editor
+alias edit="$EDITOR"
+alias pager="$PAGER"
+alias vi="$EDITOR"
+alias vim="$EDITOR"
+alias svi="sudo $EDITOR"
+alias snano="sudo nano"
+
+# fs
+alias la='ls -GAF' # compact view, show hidden
+alias less='less -R'
+alias ll='ls -GlFh' # long view, no hidden
+alias ls='ls -G'
+alias md='mkdir -p'
+alias rd='rmdir'
+alias rm='trash'
+alias sl='ls -G'
+
+# utils
+alias _="sudo"
+alias c='lolcat'
+alias cls='clear'
+alias diff='colordiff -u'
+alias dud='du -s *(/)' # show directories size
+alias h='head'
+alias history='fc -l 1'
+alias ip='ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '\''{print $2}'\'
+alias of='open .'
+alias pgrep='pgrep -f'
+alias pkill='pkill -9 -f'
+alias port='netstat -ntlp tcp' # opening ports
+alias x='exit'
+alias j='zz'
+alias zreload='source ${ZDOTDIR:-${HOME}}/.zlogin'
+
+# set htop aliases
+function _set_htop_aliases() {
+    if [ -x "$(command which htop)" ]; then
+        alias top='htop'
+    fi
+}
+_set_htop_aliases
+
+# set python3 aliases
+function _set_python3_aliases() {
+    if [ -x "$(command which python3)" ]; then
+        alias wshare='python3 -m http.server' # share folder
+    fi
+}
+_set_python3_aliases
+
+# set redhsift aliases
+function _set_redshift_aliases() {
+    if [ -x "$(command which redshift)" ]; then
+        alias redshift='killall redshift; redshift -t 5800:5100 -l 49:32 -g 0.95 -b .95>/dev/null 2>&1 &'
+    fi
+}
+_set_redshift_aliases
+
+# set ag aliases
+function _set_ag_aliases() {
+    if [ -x "$(command which ag)" ]; then
+        ## Summary for args to less:
+        # less(1)
+        #   -M (-M or --LONG-PROMPT) Prompt very verbosely
+        #   -I (-I or --IGNORE-CASE) Searches with '/' ignore case
+        #   -R (-R or --RAW-CONTROL-CHARS) For handling ANSI colors
+        #   -F (-F or --quit-if-one-screen) Auto exit if <1 screen
+        #   -X (-X or --no-init) Disable termcap init & deinit
+        alias ag='ag --smart-case --pager="less -MIRFX"'
+    fi
+}
+_set_ag_aliases
+
+# set curl aliases
+function _set_curl_aliases() {
+    if [ -x "$(command which curl)" ]; then
+        # follow redirects
+        alias cl='curl -L'
+        # follow redirects, download as original name
+        alias clo='curl -L -O'
+        # follow redirects, download as original name, continue
+        alias cloc='curl -L -C - -O'
+        # follow redirects, download as original name, continue, retry 5 times
+        alias clocr='curl -L -C - -O --retry 5'
+        # follow redirects, fetch banner
+        alias clb='curl -L -I'
+        # see only response headers from a get request
+        alias clhead='curl -D - -so /dev/null'
+    fi
+}
+_set_curl_aliases
+
+# set docker-compose aliases'
+function _set_docker_compose_aliases() {
+    if [ -x "$(command which docker-compose)" ]; then
+        alias dco="docker-compose"
+        alias dcofresh="docker-compose-fresh"
+        alias dcol="docker-compose logs -f --tail 100"
+        alias dcou="docker-compose up"
+    fi
+}
+_set_docker_compose_aliases
+
+# set docker aliases'
+function _set_docker_aliases() {
+    if [ -x "$(command which docker)" ]; then
+        alias dk='docker'
+        alias dklc='docker ps -l'                                                            # List last Docker container
+        alias dklcid='docker ps -l -q'                                                       # List last Docker container ID
+        alias dklcip='docker inspect -f "{{.NetworkSettings.IPAddress}}" $(docker ps -l -q)' # Get IP of last Docker container
+        alias dkps='docker ps'                                                               # List running Docker containers
+        alias dkpsa='docker ps -a'                                                           # List all Docker containers
+        alias dki='docker images'                                                            # List Docker images
+        alias dkrmac='docker rm $(docker ps -a -q)'                                          # Delete all Docker containers
+
+        case $OSTYPE in
+        darwin* | *bsd* | *BSD*)
+            alias dkrmui='docker images -q -f dangling=true | xargs docker rmi' # Delete all untagged Docker images
+            ;;
+        *)
+            alias dkrmui='docker images -q -f dangling=true | xargs -r docker rmi' # Delete all untagged Docker images
+            ;;
+        esac
+
+        # Function aliases from docker plugin:
+        alias dkideps='docker-image-dependencies'          # Output a graph of image dependencies using Graphiz
+        alias dkre='docker-runtime-environment'            # List environmental variables of the supplied image ID
+        alias dkrmall='docker-remove-stale-assets'         # Delete all untagged images and exited containers
+        alias dkrmi='docker-remove-images'                 # Delete images for supplied IDs or all if no IDs are passed as arguments
+        alias dkrmlc='docker-remove-most-recent-container' # Delete most recent (i.e., last) Docker container
+        alias dkrmli='docker-remove-most-recent-image'     # Delete most recent (i.e., last) Docker image
+        alias dkbash='dkelc'
+        alias dkelc='docker exec -it $(dklcid) bash --login' # Enter last container (works with Docker 1.3 and above)
+        alias dkex='docker exec -it '                        # Useful to run any commands into container without leaving host
+        alias dkri='docker run --rm -i '
+        alias dkrit='docker run --rm -it '
+        alias dkrmflast='docker rm -f $(dklcid)'
+
+        # Added more recent cleanup options from newer docker versions
+        alias dkip='docker image prune -a -f'
+        alias dksp='docker system prune -a -f'
+        alias dkvp='docker volume prune -f'
+    fi
+}
+_set_docker_aliases
+
+# set fuck aliases
+function _set_fuck_aliases() {
+    if [ -x "$(command which fuck)" ]; then
+        alias fuck='eval $(thefuck $(fc -ln -1))'
+        alias please='fuck'
+    fi
+}
+_set_fuck_aliases
+
+# set git-svn aliaases
+function _set_git_svn_aliases() {
+    if [ -x "$(command which git)" ] && [ -x "$(command which svn)" ]; then
+        alias gsr='git svn rebase'
+        alias gsc='git svn dcommit'
+        alias gsi='git svn info'
+    fi
+}
+_set_git_svn_aliases
+
+# set cask aliases
+function _set_cask_aliases() {
+    if [ -x "$(command which brew)" ]; then
+        alias bcin='brew cask install'
+        alias bcrm='brew cask uninstall'
+        alias bczp='brew cask zap'
+        alias bccl='brew cask cleanup'
+        alias bcls='brew cask list'
+        alias bcinf='brew cask info'
+        alias bcdr='brew cask doctor'
+        alias bced='brew cask edit'
+    fi
+}
+_set_cask_aliases
+
+# set brew aliases
+function _set_brew_aliases() {
+    if [ -x "$(command which brew)" ]; then
+        alias bup='brew update && brew upgrade'
+        alias bout='brew outdated'
+        alias bin='brew install'
+        alias brm='brew uninstall'
+        alias bcl='brew cleanup'
+        alias bls='brew list'
+        alias bsr='brew search'
+        alias binf='brew info'
+        alias bdr='brew doctor'
+        alias bed='brew edit'
+    fi
+}
+_set_brew_aliases
+
+# set kubectl aliases
+function _set_kubectl_aliases() {
+    if [ -x "$(command which kubectl)" ]; then
+        alias kc='kubectl'
+        alias kcdd='kubectl describe deployment'
+        alias kcdn='kubectl describe node'
+        alias kcdp='kubectl describe pod'
+        alias kcgd='kubectl get deployments'
+        alias kcgdan='kubectl get deployments --all-namespaces'
+        alias kcgn='kubectl get nodes'
+        alias kcgp='kubectl get pods'
+        alias kcgpan='kubectl get pods --all-namespaces'
+    fi
+}
+_set_kubectl_aliases
+
+# set maven aliases
+function _set_maven_aliases() {
+    if [ -x "$(command which mvn)" ]; then
+        alias mci='mvn clean install'
+        alias mi='mvn install'
+        alias mcp='mvn clean package'
+        alias mp='mvn package'
+        alias mrprep='mvn release:prepare'
+        alias mrperf='mvn release:perform'
+        alias mrrb='mvn release:rollback'
+        alias mdep='mvn dependency:tree'
+        alias mpom='mvn help:effective-pom'
+        alias mcisk='mci -Dmaven.test.skip=true'
+        alias mcpsk='mcp -Dmaven.test.skip=true'
+    fi
+}
+_set_maven_aliases
+
+# set osx aliases
+function _set_osx_aliases() {
+    if [[ "$OSTYPE" == darwin* ]]; then
+        # Desktop Programs
+        alias chrome="open -a google\ chrome"
+        alias f='open -a Finder '
+        alias fh='open -a Finder .'
+        alias filemerge="open -a '/Developer/Applications/Utilities/FileMerge.app'"
+        alias firefox="open -a firefox"
+        alias opera="open -a opera"
+        alias preview="open -a '$PREVIEW'"
+        alias safari="open -a safari"
+        alias skype='open -a Skype'
+        alias textedit='open -a TextEdit'
+        alias xcode="open -a '/Applications/XCode.app'"
+
+        if [ -s /usr/bin/firefox ]; then
+            unalias firefox
+        fi
+
+        # requires growlnotify, which can be found in the Growl DMG under "Extras"
+        alias grnot="osascript -e 'display notification \"Done\" with title \"Terminal\"'"
+
+        # Get rid of those pesky .DS_Store files recursively
+        alias dsclean='find . -type f -name .DS_Store -delete'
+
+        # Track who is listening to your iTunes music
+        alias whotunes='lsof -r 2 -n -P -F n -c iTunes -a -i TCP@`hostname`:3689'
+
+        # Flush your dns cache
+        alias flush='dscacheutil -flushcache'
+
+        # Show/hide hidden files (for Mac OS X Mavericks)
+        alias showhidden="defaults write com.apple.finder AppleShowAllFiles TRUE"
+        alias hidehidden="defaults write com.apple.finder AppleShowAllFiles FALSE"
+
+        # From http://apple.stackexchange.com/questions/110343/copy-last-command-in-terminal
+        alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
+
+        # Use Finder's Quick Look on a file (^C or space to close)
+        alias ql='qlmanage -p 2>/dev/null'
+
+        # Mute/Unmute the system volume. Plays nice with all other volume settings.
+        alias mute="osascript -e 'set volume output muted true'"
+        alias unmute="osascript -e 'set volume output muted false'"
+
+        # Pin to the tail of long commands for an audible alert after long processes
+        ## curl http://downloads.com/hugefile.zip; lmk
+        alias lmk="say 'Process complete.'"
+    fi
+}
+_set_osx_aliases
+
+# set svn aliases
+rm_svn() {
+    # about 'remove ".svn" files from directory'
+    # param '1: directory to search for files'
+    # group 'svn'
+    if [ -z "$1" ]; then
+        reference rm_svn
+        return
+    fi
+    find $1 -name .svn -print0 | xargs -0 rm -rf
+}
+svn_add() {
+    # about 'add to svn repo'
+    # group 'svn'
+    svn status | grep '^\?' | sed -e 's/? *//' | sed -e 's/ /\ /g' | xargs svn add
+}
+function _set_svn_aliases() {
+    if [ -x "$(command which svn)" ]; then
+        alias svs='svn status'
+        alias sa='svn add'
+        alias sci='svn ci -m'
+        alias sco='svn co'
+        alias sup='svn up'
+        alias scu='svn cleanup'
+        alias sli='svn list'
+        alias sdel='svn delete'
+        alias sdif='svn diff'
+        alias slog='svn log'
+        alias smv='svn move'
+    fi
+}
+_set_svn_aliases
+
+# set tmux aliases
+function _set_tmux_aliases() {
+    if [ -x "$(command which tmux)" ]; then
+        alias txl='tmux ls'
+        alias txn='tmux new -s'
+        alias txa='tmux a -t'
+    fi
+}
+_set_tmux_aliases
+
+# configure autojump
+function _configure_autojump() {
+    # autojump configuration, see https://github.com/wting/autojump for more details
+    # Only supports the Homebrew variant, Debian and Arch at the moment.
+    # Feel free to provide a PR to support other install locations
+    if command -v brew &>/dev/null && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
+        . $(brew --prefix)/etc/profile.d/autojump.sh
+    elif command -v dpkg &>/dev/null && dpkg -s autojump &>/dev/null; then
+        . "$(dpkg-query -S autojump.sh | cut -d' ' -f2)"
+    elif command -v pacman &>/dev/null && pacman -Q autojump &>/dev/null; then
+        . "$(pacman -Ql autojump | grep autojump.sh | cut -d' ' -f2)"
+    fi
+}
+_configure_autojump
+
+function _configure_pygmentize() {
+    if (! $(command -v pygmentize &>/dev/null)); then
+        pip3 install pygments
+    fi
+    # get the full paths to binaries
+    CAT_BIN="$(command which cat)"
+    LESS_BIN="$(command which less)"
+
+    # pigmentize cat and less outputs - call them ccat and cless to avoid that
+    # especially cat'ed output in scripts gets mangled with pygemtized meta characters
+    function ccat() {
+        # about 'runs either pygmentize or cat on each file passed in'
+        # param '*: files to concatenate (as normally passed to cat)'
+        # example 'cat mysite/manage.py dir/text-file.txt'
+        for var; do
+            pygmentize "$var" 2>/dev/null || "$CAT_BIN" "$var"
+        done
+    }
+
+    function cless() {
+        # about 'it pigments the file passed in and passes it to less for pagination'
+        # param '$1: the file to paginate with less'
+        # example 'less mysite/manage.py'
+        pygmentize -g $* | "$LESS_BIN" -R
+    }
+}
+_configure_pygmentize
+
+
+#
+# functions
+#
+function down4me() {
+    # about 'checks whether a website is down for you, or everybody'
+    # param '1: website url'
+    # example '$ down4me http://www.google.com'
+    # group 'base'
+    curl -Ls "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
+}
+
+function up() {
+    # about 'update brew packages'
+    # group 'base'
+    brew update
+    brew upgrade
+    brew cleanup
+    ls -l /usr/local/Homebrew/Library/Homebrew | grep homebrew-cask | awk '{print $9}' | for evil_symlink in $(cat -); do rm -v /usr/local/Homebrew/Library/Homebrew/$evil_symlink; done
+    brew doctor
+}
+
+function man() {
+    # about 'better man'
+    # group 'base'
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+        PAGER=/usr/bin/less \
+        _NROFF_U=1 \
+        PATH=${HOME}/bin:${PATH} \
+        man "$@"
+}
+
+function colours() {
+    # about 'print colors'
+    # group 'base'
+    for i in {0..255}; do
+        printf "\x1b[38;5;${i}mcolour${i}\n"
+    done
+}
+
+function catt() {
+    # about 'display whatever file is regular file or folder'
+    # param '1: target file or dir'
+    # example '$ catt ~/.bashrc'
+    # group 'base'
+    for i in "$@"; do
+        if [ -d "$i" ]; then
+            ls "$i"
+        else
+            cat "$i"
+        fi
+    done
+}
+
+function ips() {
+    # about 'display all ip addresses for this host'
+    if command -v ifconfig &>/dev/null; then
+        ifconfig | awk '/inet /{ gsub(/addr:/, ""); print $2 }'
+    elif command -v ip &>/dev/null; then
+        ip addr | grep -oP 'inet \K[\d.]+'
+    else
+        echo "You don't have ifconfig or ip command installed!"
+    fi
+}
+
+function myip() {
+    # about 'displays your ip address, as seen by the Internet'
+    # group 'base'
+    list=("http://myip.dnsomatic.com/" "http://checkip.dyndns.com/" "http://checkip.dyndns.org/")
+    for url in ${list[*]}; do
+        res=$(curl -s "${url}")
+        if [ $? -eq 0 ]; then
+            break
+        fi
+    done
+    res=$(echo "$res" | grep -Eo '[0-9\.]+')
+    echo -e "Your public IP is: ${echo_bold_green} $res ${echo_normal}"
+}
+
+function pickfrom() {
+    # about 'picks random line from file'
+    # param '1: filename'
+    # example '$ pickfrom /usr/share/dict/words'
+    # group 'base'
+    local file=$1
+    [ -z "$file" ] && reference $FUNCNAME && return
+    length=$(cat $file | wc -l)
+    n=$(expr $RANDOM \* $length \/ 32768 + 1)
+    head -n $n $file | tail -1
+}
+
+function passgen() {
+    # about 'generates random password from dictionary words'
+    # param 'optional integer length'
+    # param 'if unset, defaults to 4'
+    # example '$ passgen'
+    # example '$ passgen 6'
+    # group 'base'
+    local i pass length=${1:-4}
+    pass=$(echo $(for i in $(eval echo "{1..$length}"); do pickfrom /usr/share/dict/words; done))
+    echo "With spaces (easier to memorize): $pass"
+    echo "Without (use this as the password): $(echo $pass | tr -d ' ')"
+}
+# create alias pass to passgen when pass isn't installed
+if ! command -v pass &>/dev/null || [ "$BASH_IT_LEGACY_PASS" = true ]; then
+    alias pass=passgen
+fi
+
+function pmdown() {
+    # about 'preview markdown file in a browser'
+    # param '1: markdown file'
+    # example '$ pmdown README.md'
+    # group 'base'
+    if command -v markdown &>/dev/null; then
+        markdown $1 | browser
+    else
+        echo "You don't have a markdown command installed!"
+    fi
+}
+
+function mkcd() {
+    # about 'make one or more directories and cd into the last one'
+    # param 'one or more directories to create'
+    # example '$ mkcd foo'
+    # example '$ mkcd /tmp/img/photos/large'
+    # example '$ mkcd foo foo1 foo2 fooN'
+    # example '$ mkcd /tmp/img/photos/large /tmp/img/photos/self /tmp/img/photos/Beijing'
+    # group 'base'
+    mkdir -p -- "$@" && eval cd -- "\"\$$#\""
+}
+
+function lsgrep() {
+    # about 'search through directory contents with grep'
+    # group 'base'
+    ls | grep "$*"
+}
+
+function quiet() {
+    # about 'what *does* this do?'
+    # group 'base'
+    $* &>/dev/null &
+}
+
+function usage() {
+    # about 'disk usage per directory, in Mac OS X and Linux'
+    # param '1: directory name'
+    # group 'base'
+    if [ $(uname) = "Darwin" ]; then
+        if [ -n "$1" ]; then
+            du -hd 1 "$1"
+        else
+            du -hd 1
+        fi
+
+    elif [ $(uname) = "Linux" ]; then
+        if [ -n "$1" ]; then
+            du -h --max-depth=1 "$1"
+        else
+            du -h --max-depth=1
+        fi
+    fi
+}
+
+function command_exists() {
+    # about 'checks for existence of a command'
+    # param '1: command to check'
+    # example '$ command_exists ls && echo exists'
+    # group 'base'
+    type "$1" &>/dev/null
+}
+
+function buf() {
+    # about 'back up file with timestamp'
+    # param 'filename'
+    # group 'base'
+    local filename=$1
+    local filetime=$(date +%Y%m%d_%H%M%S)
+    cp -a "${filename}" "${filename}_${filetime}"
+}
+
+function browser() {
+    # about 'pipe html to a browser'
+    # example '$ echo "<h1>hi mom!</h1>" | browser'
+    # example '$ ron -5 man/rip.5.ron | browser'
+    # group 'browser'
+
+    if [ -t 0 ]; then
+        if [ -n "$1" ]; then
+            open $1
+        else
+            reference browser
+        fi
+
+    else
+        f="/tmp/browser.$RANDOM.html"
+        cat /dev/stdin >$f
+        open $f
+    fi
+}
+
+function docker-compose-fresh() {
+    # about 'shut down, remove and start again the docker-compose setup, then tail the logs'
+    # group 'docker-compose'
+    # param '1: name of the docker-compose.yaml file to use (optional). Default: docker-compose.yaml'
+    # example 'docker-compose-fresh docker-compose-foo.yaml'
+
+    local DCO_FILE_PARAM=""
+    if [ -n "$1" ]; then
+        echo "Using docker-compose file: $1"
+        DCO_FILE_PARAM="--file $1"
+    fi
+
+    docker-compose $DCO_FILE_PARAM stop
+    docker-compose $DCO_FILE_PARAM rm -f
+    docker-compose $DCO_FILE_PARAM up -d
+    docker-compose $DCO_FILE_PARAM logs -f --tail 100
+}
+
+function docker-remove-most-recent-container() {
+    # about 'attempt to remove the most recent container from docker ps -a'
+    # group 'docker'
+    docker ps -ql | xargs docker rm
+}
+
+function docker-remove-most-recent-image() {
+    # about 'attempt to remove the most recent image from docker images'
+    # group 'docker'
+    docker images -q | head -1 | xargs docker rmi
+}
+
+function docker-remove-stale-assets() {
+    # about 'attempt to remove exited containers and dangling images'
+    # group 'docker'
+    docker ps --filter status=exited -q | xargs docker rm --volumes
+    docker images --filter dangling=true -q | xargs docker rmi
+}
+
+function docker-enter() {
+    # about 'enter the specified docker container using bash'
+    # group 'docker'
+    # param '1: Name of the container to enter'
+    # example 'docker-enter oracle-xe'
+
+    docker exec -it "$@" /bin/bash
+}
+
+function docker-remove-images() {
+    # about 'attempt to remove images with supplied tags or all if no tags are supplied'
+    # group 'docker'
+    if [ -z "$1" ]; then
+        docker rmi $(docker images -q)
+    else
+        DOCKER_IMAGES=""
+        for IMAGE_ID in $@; do DOCKER_IMAGES="$DOCKER_IMAGES\|$IMAGE_ID"; done
+        # Find the image IDs for the supplied tags
+        ID_ARRAY=($(docker images | grep "${DOCKER_IMAGES:2}" | awk {'print $3'}))
+        # Strip out duplicate IDs before attempting to remove the image(s)
+        docker rmi $(echo ${ID_ARRAY[@]} | tr ' ' '\n' | sort -u | tr '\n' ' ')
+    fi
+}
+
+function docker-image-dependencies() {
+    # about 'attempt to create a Graphiz image of the supplied image ID dependencies'
+    # group 'docker'
+    if hash dot 2>/dev/null; then
+        OUT=$(mktemp -t docker-viz-XXXX.png)
+        docker images -viz | dot -Tpng >$OUT
+        case $OSTYPE in
+        linux*)
+            xdg-open $OUT
+            ;;
+        darwin*)
+            open $OUT
+            ;;
+        esac
+    else
+        echo >&2 "Can't show dependencies; Graphiz is not installed"
+    fi
+}
+
+function docker-runtime-environment() {
+    # about 'attempt to list the environmental variables of the supplied image ID'
+    # group 'docker'
+    docker run "$@" env
+}
+
+function docker-archive-content() {
+    # about 'show the content of the provided Docker image archive'
+    # group 'docker'
+    # param '1: image archive name'
+    # example 'docker-archive-content images.tar.gz'
+
+    if [ -n "$1" ]; then
+        tar -xzOf $1 manifest.json | jq '[.[] | .RepoTags] | add'
+    fi
+}
+
+function explain() {
+    # about 'explain any bash command via mankier.com manpage API'
+    # param '1: Name of the command to explain'
+    # example '$ explain                # interactive mode. Type commands to explain in REPL'
+    # example '$ explain '"'"'cmd -o | ...'"'"' # one quoted command to explain it.'
+    # group 'explain'
+
+    if [ "$#" -eq 0 ]; then
+        while read -p "Command: " cmd; do
+            curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$cmd"
+        done
+        echo "Bye!"
+    elif [ "$#" -eq 1 ]; then
+        curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$1"
+    else
+        echo "Usage"
+        echo "explain                  interactive mode."
+        echo "explain 'cmd -o | ...'   one quoted command to explain it."
+    fi
+}
+
+function pman() {
+    # about 'view man documentation in Preview'
+    # param '1: man page to view'
+    # example '$ pman bash'
+    # group 'osx'
+    man -t "${1}" | open -fa $PREVIEW
+}
+
+function prevcurl() {
+    # about 'download a file and open it in Preview'
+    # param '1: url'
+    # group 'osx'
+
+    if [ ! $(uname) = "Darwin" ]; then
+        echo "This function only works with Mac OS X"
+        return 1
+    fi
+    curl "$*" | open -fa $PREVIEW
+}
+# Make this backwards compatible
+alias pcurl='prevcurl'
+
+function refresh-launchpad() {
+    # about 'Reset launchpad layout in macOS'
+    # example '$ refresh-launchpad'
+    # group 'osx'
+
+    if [ $(uname) = "Darwin" ]; then
+        defaults write com.apple.dock ResetLaunchPad -bool TRUE
+        killall Dock
+    else
+        echo "Sorry, this only works on Mac OS X"
+    fi
+}
+
+function sshlist() {
+    # about 'list hosts defined in ssh config'
+    # group 'ssh'
+    awk '$1 ~ /Host$/ {for (i=2; i<=NF; i++) print $i}' ~/.ssh/config
+}
+
+export ZSH_PLUGINS_ALIAS_TIPS_TEXT="📌 Alias: "
+export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ c"
+export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=0
+[ ~/github/zsh/alias-tips/alias-tips.plugin.zsh ] && source ~/github/zsh/alias-tips/alias-tips.plugin.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

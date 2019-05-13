@@ -29,3 +29,7 @@ velocity.log
 **/src/main/webapp/package-lock.json
 dependency-reduced-pom.xml
 *.war
+
+*.swp
+*.zwc
+*.zwc.old
