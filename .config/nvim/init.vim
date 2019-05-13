@@ -39,7 +39,9 @@ endif
 " Behaviors
 " ---------------
 syntax enable
-set backup             " Turn on backups
+" set backup             " Turn on backups
+set nobackup           "  Disable file backup
+set nowritebackup
 set autoread           " Automatically reload changes if detected
 set wildmenu           " Turn on WiLd menu
 " longest common part, then all.

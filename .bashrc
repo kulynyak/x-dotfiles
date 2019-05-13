@@ -1,3 +1,5 @@
+export TERM=screen-256color
+
 PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
 
 # Java
