@@ -36,6 +36,7 @@ alias -g L="| less"
 alias -g X='| xargs'
 alias -g X0='| xargs -0'
 alias -g C='| wc -l'
+alias -g D='| done'
 alias -g A='| awk'
 alias -g H='| head -n $(($LINES-5))'
 alias -g T='| tail -n $(($LINES-5))'
@@ -318,7 +319,7 @@ function _set_osx_aliases() {
         fi
 
         # requires growlnotify, which can be found in the Growl DMG under "Extras"
-        alias grnot="osascript -e 'display notification \"Done\" with title \"Terminal\"'"
+        alias done="osascript -e 'display notification \"Done\" with title \"Terminal\"'"
 
         # Get rid of those pesky .DS_Store files recursively
         alias dsclean='find . -type f -name .DS_Store -delete'
