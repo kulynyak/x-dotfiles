@@ -807,10 +807,11 @@ export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ c"
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 [ ~/github/zsh/alias-tips/alias-tips.plugin.zsh ] && source ~/github/zsh/alias-tips/alias-tips.plugin.zsh
 
-# autocompletions
+# autocompletion
 
-(( ${+commands[kubectl]} )) && <(command kubectl completion zsh)
+(( ${+commands[kubectl]} )) && source <(command kubectl completion zsh)
 (( ${+commands[helm]} )) && source <(command helm completion zsh)
 (( ${+commands[minikube]} )) && source <(command minikube completion zsh)
 
+# fzf
 (( ${+commands[fzf]} )) && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
