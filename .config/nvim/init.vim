@@ -23,7 +23,7 @@ set showmode
 " set noshowmode     " Don't show the mode since Powerline shows it
 set title          " Set the title of the window in the terminal to the file
 if exists('+colorcolumn')
-  highlight ColorColumn ctermbg=7
+  highlight ColorColumn ctermbg=6
   set colorcolumn=120 " Color the 120th column differently as a wrapping guide.
 endif
 
@@ -57,11 +57,19 @@ set ttimeoutlen=100    " Time to wait for a key sequence.
 set nofoldenable       " Disable folding entirely.
 set foldlevelstart=99  " I really don't like folds.
 set formatoptions=crql
-set iskeyword+=\$,-   " Add extra characters that are valid parts of variables
+set iskeyword+=\$,-    " Add extra characters that are valid parts of variables
 set nostartofline      " Don't go to the start of the line after some commands
 set scrolloff=3        " Keep three lines below the last line when scrolling
 set gdefault           " this makes search/replace global by default
 set switchbuf=useopen  " Switch to an existing buffer if one exists
+set autochdir          " Automatically change window's cwd to file's dir
+" Uncomment the following to have Vim jump to the last position when reopening a
+" file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endi
+
 
 " ---------------
 " Text Format
@@ -134,3 +142,95 @@ set complete=.,w,b,u,U
 :imap jk <Esc>
 :imap kj <Esc>
 :imap ;; <Esc>
+map q <Nop> " Disable recording
+
+" Sudo to write
+cnoremap w!! w !sudo tee % >/dev/null
+
+" Insert/append single char in 'normal' mode
+:nnoremap s :exec "normal i".nr2char(getchar())."\e"<cr> " s insert
+:nnoremap S :exec "normal a".nr2char(getchar())."\e"<cr> " S append
+
+vnoremap < <gv " Shift+> keys " Easier moving of code blocks
+vnoremap > >gv " Shift+< keys " Easier moving of code blocks
+
+"Toggle [i]nvisible characters
+nnoremap <leader>i :set list!<cr>
+
+" Open a quickfix window for the last search.
+nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
+
+" Activate autocomplete at <Ctrl+Space>
+inoremap <c-space> <c-x><c-o>
+
+" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
+" which is the default
+map Y y$
+nnoremap Y y$
+
+" Close buffer
+noremap <leader>c :bd<cr>
+map <c-q> :bd<cr>
+
+" Allow multiple indentation/deindentation in visual mode
+vnoremap < <gv
+vnoremap > >g
+
+" Keep the cursor in place while joining lines
+nnoremap J mzJ`
+
+" Down N screen lines (differs from "j" when line wraps)
+nnoremap j g
+
+" Adjust viewports to the same size
+map <leader>= <C-w>=
+
+" Easier change size for splitted windows
+nnoremap {{ :vertical resize +5<cr>
+nnoremap }} :vertical resize -5<cr>
+
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Keep search matches when jumping around
+nnoremap g; g;zz
+nnoremap g, g,zz
+
+" Quick insertion of newline in normal mode
+nnoremap <silent> <cr> :put=''<cr>
+
+" Select entire buffer
+nnoremap vaa ggvGg_
+
+" Go to the position of the last change in this file"
+nnoremap gI `
+
+" Abbreviations
+" no one is really happy until you have this shortcuts
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+
+" Use Q for formatting the current paragraph (or visual selection)
+vnoremap Q gq
+nnoremap Q gqa
+
+
+augroup fast_quit
+  au!
+  au FileType help nnoremap <buffer> q :q<cr>
+  au FileType qf nnoremap <buffer> q :q<cr>
+  au FileType netrw nnoremap <buffer><nowait> q :bd!<cr>
+  au FileType man nnoremap <buffer> q :q<cr>
+  au CmdwinEnter * nnoremap <buffer> q :q<cr>
+  au BufReadPost fugitive://* nnoremap <buffer> q :q<cr>
+augroup END
+
