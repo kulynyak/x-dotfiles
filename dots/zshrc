@@ -808,7 +808,7 @@ export ZSH_PLUGINS_ALIAS_TIPS_TEXT="📌 Alias: "
 export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ c"
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 [ ~/github/zsh/alias-tips/alias-tips.plugin.zsh ] && source ~/github/zsh/alias-tips/alias-tips.plugin.zsh
-
+[ ~/github/zsh/ra-git.zsh/ra-git.plugin.zsh ] && source ~/github/zsh/ra-git.zsh/ra-git.plugin.zsh
 # autocompletion
 
 (( ${+commands[kubectl]} )) && source <(command kubectl completion zsh)
