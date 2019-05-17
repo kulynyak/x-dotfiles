@@ -100,7 +100,7 @@ alias pkill='pkill -9 -f'
 alias port='netstat -ntlp tcp' # opening ports
 alias x='exit'
 alias j='zz'
-alias zreload='source ${ZDOTDIR:-${HOME}}/.zlogin'
+alias zreload='exec zsh'
 
 # set htop aliases
 function _set_htop_aliases() {
@@ -515,7 +515,7 @@ function myip() {
     # group 'base'
     list=("http://myip.dnsomatic.com/" "http://checkip.dyndns.com/" "http://checkip.dyndns.org/")
     for url in ${list[*]}; do
-        res=$(curl -s "${url}")
+        res=$(command curl -s "${url}")
         if [ $? -eq 0 ]; then
             break
         fi

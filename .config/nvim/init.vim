@@ -125,3 +125,12 @@ set mouse=a    " Mouse in all modes
 
 " Better complete options to speed it up
 set complete=.,w,b,u,U
+
+" ---------------
+" Keyboard
+" ---------------
+" Can be typed even faster than jj, and if you are already in
+"    normal mode, you (usually) don't accidentally move:
+:imap jk <Esc>
+:imap kj <Esc>
+:imap ;; <Esc>
