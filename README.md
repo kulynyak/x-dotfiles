@@ -9,3 +9,4 @@ For the same setup execute the following command, or just pick what you need fro
 ``` bash
 curl -s https://raw.githubusercontent.com/kulynyak/x-dotfiles/master/dots/setup.sh | bash
 ```
+[Here](https://github.com/kulynyak/hammerspoon) is related my hammerspoon dotfiles repo.
