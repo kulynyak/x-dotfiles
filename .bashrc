@@ -2,6 +2,10 @@ export TERM=screen-256color
 
 PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
 
+if [ -x "$(command which brew)" ]; then
+  PATH="$PATH:$(brew --prefix coreutils)/libexec/gnubin" 
+fi
+
 # Java
 export _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true"
 export JAVA_HOME="$(/usr/libexec/java_home -v 11)"
