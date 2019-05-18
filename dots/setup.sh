@@ -182,4 +182,8 @@ open -a "Hammerspoon"
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Hammerspoon.app", hidden:true}' > /dev/null
 echo 'Done! Remember to enable Accessibility for Hammerspoon.'
 
+echo $'Karabiner setup'
+open /Applications/Karabiner-Elements.app
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Karabiner-Elements.app", hidden:true}' > /dev/null
+
 echo $'\nSetup is done, please logout/login to start use your new config.'
