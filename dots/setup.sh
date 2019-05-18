@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 
-DOT_HUB="git@gitlab.com:raxXxar/x-dotfiles.git"
-HAMMER_HUB="git@gitlab.com:raxXxar/hammerspoon.git"
+DOT_HUB="https://github.com/kulynyak/x-dotfiles.git"
+HAMMER_HUB="https://github.com/kulynyak/hammerspoon.git"
 
 ZSH_ALIAS_TIP="https://github.com/djui/alias-tips.git"
 ZSH_RA_GIT="https://github.com/kulynyak/ra-git.zsh.git"
