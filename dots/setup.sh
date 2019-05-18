@@ -1,4 +1,4 @@
-!/usr/bin/env bash
+!/bin/bash
 
 DOT_HUB="https://github.com/kulynyak/x-dotfiles.git"
 HAMMER_HUB="https://github.com/kulynyak/hammerspoon.git"
@@ -167,7 +167,7 @@ fi
 echo $'\nConfigure links'
 dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP 
 
-echo $"\nContinue with brew bundle"
+echo $'\nContinue with brew bundle'
 brew bundle --file=$HOME/dots/Brewfile
 
 echo $'\nLuarocks modules'
