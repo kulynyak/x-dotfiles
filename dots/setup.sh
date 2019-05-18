@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 DOT_HUB="https://github.com/kulynyak/x-dotfiles.git"
 HAMMER_HUB="https://github.com/kulynyak/hammerspoon.git"
