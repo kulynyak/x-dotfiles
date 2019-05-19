@@ -22,10 +22,15 @@
     ~/.fasd:
     ~/dots/nvim:
       path: ~/.config/nvim
+    ~/.vim:
+      path: ~/.config/nvim
+    ~/.vimrc:
+      path: ~/.config/nvim/init.vim  
     ~/.tmux.conf:
       path: ~/dots/tmux/.tmux.conf
     ~/dots/hammerspoon:
       path: ~/.hammerspoon
     ~/.kube/config:
       path: kube/config
+
       
