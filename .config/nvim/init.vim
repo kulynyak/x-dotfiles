@@ -4,8 +4,25 @@ if $TERM =~ '-256color'
 endif
 
 " ---------------
+" Plugins
+" ---------------
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.local/share/nvim/plugged')
+" Declare the list of plugins.
+Plug 'evidanary/grepg.vim'
+Plug 'neomake/neomake'
+Plug 'tpope/vim-surround'
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+" ---------------
 " UI
 " ---------------
+"set termguicolors  " True color in the terminal
+hi Cursor guifg=green guibg=green
+hi Cursor2 guifg=red guibg=red
+set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50
+
 set ruler          " Ruler on
 set number         " Line numbers on
 
@@ -23,7 +40,7 @@ set showmode
 " set noshowmode     " Don't show the mode since Powerline shows it
 set title          " Set the title of the window in the terminal to the file
 if exists('+colorcolumn')
-  highlight ColorColumn ctermbg=6
+  highlight ColorColumn ctermbg=7
   set colorcolumn=120 " Color the 120th column differently as a wrapping guide.
 endif
 
@@ -39,9 +56,9 @@ endif
 " Behaviors
 " ---------------
 syntax enable
-" set backup             " Turn on backups
 set nobackup           "  Disable file backup
 set nowritebackup
+set noswapfile         " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set autoread           " Automatically reload changes if detected
 set wildmenu           " Turn on WiLd menu
 " longest common part, then all.
@@ -62,13 +79,19 @@ set nostartofline      " Don't go to the start of the line after some commands
 set scrolloff=3        " Keep three lines below the last line when scrolling
 set gdefault           " this makes search/replace global by default
 set switchbuf=useopen  " Switch to an existing buffer if one exists
+set showcmd            " display incomplete commands
 set autochdir          " Automatically change window's cwd to file's dir
 " Uncomment the following to have Vim jump to the last position when reopening a
 " file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
-endi
+end
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+set diffopt+=vertical " Always use vertical diffs
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 
 " ---------------
@@ -137,22 +160,24 @@ set complete=.,w,b,u,U
 " ---------------
 " Keyboard
 " ---------------
-" Can be typed even faster than jj, and if you are already in
-"    normal mode, you (usually) don't accidentally move:
+let mapleader=" "
+"
+" Can be typed even faster than jj, and if you are already in normal mode, you (usually) don't accidentally move:
 :imap jk <Esc>
 :imap kj <Esc>
 :imap ;; <Esc>
+inoremap ;; <Esc>
 map q <Nop> " Disable recording
-
+"
 " Sudo to write
 cnoremap w!! w !sudo tee % >/dev/null
 
 " Insert/append single char in 'normal' mode
-:nnoremap s :exec "normal i".nr2char(getchar())."\e"<cr> " s insert
-:nnoremap S :exec "normal a".nr2char(getchar())."\e"<cr> " S append
+" :nnoremap s :exec "normal i".nr2char(getchar())."\e"<cr> " s insert
+" :nnoremap S :exec "normal a".nr2char(getchar())."\e"<cr> " S append
 
-vnoremap < <gv " Shift+> keys " Easier moving of code blocks
-vnoremap > >gv " Shift+< keys " Easier moving of code blocks
+" vnoremap < <gv " Shift+> keys " Easier moving of code blocks
+" vnoremap > >gv " Shift+< keys " Easier moving of code blocks
 
 "Toggle [i]nvisible characters
 nnoremap <leader>i :set list!<cr>
@@ -223,6 +248,21 @@ cnoreabbrev Qall qall
 vnoremap Q gq
 nnoremap Q gqa
 
+" Switch between the last two files
+nnoremap <leader><leader> <C-^>
+
+" Shortcut to edit THIS configuration file: (e)dit (c)onfiguration
+nnoremap <silent> <leader>ec :e $MYVIMRC<CR>
+
+" Shortcut to source (reload) THIS configuration file after editing it: (s)ource (c)onfiguraiton
+nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
+
+" Get off my lawn
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>
+
 
 augroup fast_quit
   au!
@@ -234,3 +274,18 @@ augroup fast_quit
   au BufReadPost fugitive://* nnoremap <buffer> q :q<cr>
 augroup END
 
+
+
+
+" --------------- 
+" neomake
+" ---------------
+" When writing a buffer (no delay).
+call neomake#configure#automake('w')
+" When writing a buffer (no delay), and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+" When reading a buffer (after 1s), and when writing (no delay).
+call neomake#configure#automake('rw', 1000)
+" Full config: when writing or reading a buffer, and on changes in insert and
+" normal mode (after 1s; no delay when writing).
+call neomake#configure#automake('nrwi', 500)

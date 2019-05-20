@@ -165,7 +165,11 @@ if [ "=$(dscl . -read $HOME UserShell)=" != "=UserShell: /usr/local/bin/zsh=" ];
 fi
 
 echo $'\nConfigure links'
-dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP 
+dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP
+
+echo $'Insstall neovim vim-plug'
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo $'\nContinue with brew bundle'
 brew bundle --file=$HOME/dots/Brewfile
