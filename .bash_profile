@@ -176,3 +176,4 @@ fi
 
 # The last line
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
