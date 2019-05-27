@@ -113,7 +113,7 @@ dir_hnd "$HOME/.ssh" "$DOTS_BKP/ssh"
 file_hnd "$HOME/.bash_history" "$DOTS_BKP" "bash_history"
 file_hnd "$HOME/.zhistory" "$DOTS_BKP" "zhistory"
 file_hnd "$HOME/.fasd" "$DOTS_BKP" "fasd"
-file_hnd "$HOME/.kube/config" "$DOTS_BKP/kube" "config"
+dir_hnd "$HOME/.kube" "$DOTS_BKP/kube"
 
 echo $'\nClone Dotfiles if does not exists'
 if [ ! -d "$HOME/.dotfiles" ]; then

@@ -89,6 +89,8 @@ if [ -d "$SCG_SRC" ]; then
     export SCG_SRC
 fi
 
+#export KUBECONFIG=$HOME/.kube/config-minikube:$HOME/.kube/config-poc:$HOME/.kube/config-nix
+
 # the last one
 export PATH
 
