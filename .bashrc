@@ -161,5 +161,11 @@ if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
     source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 fi
 
-# The last line
-[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+# The last lines
+FZF_SHELL=/usr/local/opt/fzf/shell
+# fsf auto-completion
+[[ -f "$FZF_SHELL/completion.bash" ]] && \
+    source "$FZF_SHELL/completion.bash" 2> /dev/null
+# fzf key bindings
+[[ -f "$FZF_SHELL/key-bindings.bash" ]] && \
+    source "$FZF_SHELL/key-bindings.bash" 2> /dev/null
