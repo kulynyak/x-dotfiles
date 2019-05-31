@@ -1,107 +1,165 @@
-export TERM=screen-256color
+#!/usr/bin/env bash
 
-PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
+source $HOME/.profile
 
-# if [ -x "$(command which brew)" ]; then
-#   PATH="$PATH:$(brew --prefix coreutils)/libexec/gnubin" 
-# fi
+## GENERAL OPTIONS ##
 
-# Java
-export _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true"
-export JAVA_HOME="$(/usr/libexec/java_home -v 11)"
-export JAVA11_HOME="$(/usr/libexec/java_home -v 11)"
-export JAVA12_HOME="$(/usr/libexec/java_home -v 12)"
-# export JAVA8_HOME="$(/usr/libexec/java_home -v 1.8)"
-# export JAVA7_HOME="$(/usr/libexec/java_home -v 1.7)"
+# Prevent file overwrite on stdout redirection
+# Use `>|` to force redirection to an existing file
+set -o noclobber
 
-# bin in home dir
-HOME_BIN="$HOME/bin"
-[ -d "$HOME_BIN" ] && PATH="$HOME_BIN:$PATH"
+# Update window size after every command
+shopt -s checkwinsize
 
-# gem
-GEM_HOME="$HOME/.gem"
-GEM_PATH="$GEM_HOME/bin"
-if [ -d "$GEM_HOME" ] && [ -d "$GEM_PATH"]; then
-    export GEM_HOME
-    export GEM_PATH
-    PATH="$PATH:$GEM_PATH"
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+PROMPT_DIRTRIM=2
+
+# Enable history expansion with space
+# E.g. typing !!<space> will replace the !! with your last command
+bind Space:magic-space
+
+# Turn on recursive globbing (enables ** to recurse all directories)
+shopt -s globstar 2>/dev/null
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+
+## SMARTER TAB-COMPLETION (Readline bindings) ##
+
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+
+# Treat hyphens and underscores as equivalent
+bind "set completion-map-case on"
+
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+bind "set mark-symlinked-directories on"
+
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor.
+set skip-completed-text on
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off 
+
+## SANE HISTORY DEFAULTS ##
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# Save multi-line commands as one command
+shopt -s cmdhist
+
+# Record each line as it gets issued
+PROMPT_COMMAND='history -a'
+
+# Huge history. Doesn't appear to slow things down, so why not?
+HISTSIZE=500000
+HISTFILESIZE=100000
+
+# Avoid duplicate entries
+HISTCONTROL="erasedups:ignoreboth"
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+
+# Use standard ISO 8601 timestamp
+# %F equivalent to %Y-%m-%d
+# %T equivalent to %H:%M:%S (24-hours format)
+HISTTIMEFORMAT='%F %T '
+
+## BETTER DIRECTORY NAVIGATION ##
+
+# Prepend cd to directory names automatically
+shopt -s autocd 2>/dev/null
+# Correct spelling errors during tab-completion
+shopt -s dirspell 2>/dev/null
+# Correct spelling errors in arguments supplied to cd
+shopt -s cdspell 2>/dev/null
+
+# This defines where cd looks for targets
+# Add the directories you want to have fast access to, separated by colon
+# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
+CDPATH="."
+
+# This allows you to bookmark your favorite places across the file system
+# Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
+shopt -s cdable_vars
+
+# editor
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+
+# browser
+if [[ "$OSTYPE" == darwin* ]]; then
+    export BROWSER='open'
 fi
 
-# gnu man
-MANPATH_GNU="/usr/local/opt/findutils/libexec/gnuman"
-if [ -d "$MANPATH_GNU" ]; then
-    export MANPATH="$MANPATH_GNU:$MANPATH"
-fi
+# Aliases
 
-# android
-ANDROID_HOME="/usr/local/share/android-sdk"
-if [ -d "$ANDROID_HOME" ]; then
-    export ANDROID_HOME
-    PATH="$ANDROID_HOME/platform-tools:$PATH"
-fi
+# Editor
+alias edit="$EDITOR"
+alias pager="$PAGER"
+alias snano="sudo nano"
+alias svi="sudo $EDITOR"
+alias vi="$EDITOR"
+alias vim="$EDITOR"
 
-# anaconda3
-ANACONDA3="/usr/local/anaconda3/bin"
-if [ -d "$ANACONDA3" ]; then
-    PATH="$ANACONDA3:$PATH"
-fi
+# General
+alias l='ls -1A'         # Lists in one column, hidden files.
+alias la='ll -A'         # Lists human readable sizes, hidden files.
+alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
+alias lk='ll -Sr'        # Lists sorted by size, largest last.
+alias ll='ls -lh'        # Lists human readable sizes.
+alias lm='la | "$PAGER"' # Lists human readable sizes, hidden files through pager.
+alias lr='ll -R'         # Lists human readable sizes, recursively.
+alias lt='ll -tr'        # Lists sorted by date, most recent last.
+alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
+alias lx='ll -XB'        # Lists sorted by extension (GNU only).
+alias sl='ls -G'         # I often screw this up.
 
-# go
-GOROOT="$(brew --prefix golang)/libexec"
-if [ -d "$GOROOT" ]; then
-    export GOROOT
-    export GOPATH="$HOME/.go"
-    [ -d "$GOPATH" ] || mkdir -p "$GOPATH"
-    [ -d "$GOPATH/src/github.com" ] || mkdir -p "$GOPATH/src/github.com"
-    PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
-fi
+# Utils
+alias diffu="diff --unified"
+alias md='mkdir -p'
+alias o='open'
+alias rd='rmdir'
+alias rm='trash'
+alias x='exit'
+alias breload='exec bash'
 
-# ruby
-RUBY_PATH="/usr/local/opt/ruby"
-if [ -d "$RUBY_PATH" ]; then
-    export LDFLAGS="$LDFLAGS -L$RUBY_PATH/lib"
-    export CPPFLAGS="$CPPFLAGS -I$RUBY_PATH/include"
-    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$RUBY_PATH/lib/pkgconfig"
-    PATH="$RUBY_PATH/bin:${PATH}"
-fi
-
-# icu4c
-ICU4_PATH="/usr/local/opt/icu4c"
-if [ -d "$ICU4_PATH" ]; then
-    export LDFLAGS="$LDFLAGS -L$ICU4_PATH/lib"
-    export CPPFLAGS="$CPPFLAGS -I$ICU4_PATH/include"
-    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$ICU4_PATH/lib/pkgconfig"
-    PATH="$ICU4_PATH/bin:$ICU4_PATH/sbin:${PATH}"
-fi
-
-# sqlite
-SQLITE_PATH="/usr/local/opt/sqlite"
-if [ -d "$SQLITE_PATH" ]; then
-    export LDFLAGS="$LDFLAGS -L$SQLITE_PATH/lib"
-    export CPPFLAGS="$CPPFLAGS -I$SQLITE_PATH/include"
-    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$SQLITE_PATH/lib/pkgconfig"
-    PATH="$SQLITE_PATH/bin:$PATH"
-fi
-
-# syniverse
-SCG_SRC="$HOME/svn/syniverse/scg"
-if [ -d "$SCG_SRC" ]; then
-    export SCG_SRC
-fi
-
-#export KUBECONFIG=$HOME/.kube/config-minikube:$HOME/.kube/config-poc:$HOME/.kube/config-nix
-
-# the last one
-export PATH
-
-# dotfiles
-alias dfs="/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias dfss="dfs status"
-alias dfsc='dfs commit -m "$(date -u)" && dfs push'
-dfsa() {
-    dfs add $(dfs status | grep modified | sed 's/\(.*modified:\s*\)//')
+up() {
+    brew update
+    brew upgrade
+    brew cleanup
+    ls -G -l /usr/local/Homebrew/Library/Homebrew | grep homebrew-cask | awk '{print $9}' | \
+    for evil_symlink in $(cat -); do
+        trash -v /usr/local/Homebrew/Library/Homebrew/$evil_symlink
+    done
+    brew doctor
 }
-alias dfsl="dfs ls-tree -r master --name-only"
-alias dfsla="dfs log --pretty=format: --name-only --diff-filter=A | sort - | sed '/^$/d'"
-DOTS_BKP="$HOME/Dropbox/sync.dotfiles"
-alias dotbot="dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP"
+
+# Resource Usage
+alias df='df -kh'
+alias du='du -kh'
+
+# Use bash-completion, if available
+[[ $PS1 && -f /usr/local/etc/profile.d/bash_completion.sh ]] &&
+    . /usr/local/etc/profile.d/bash_completion.sh
+
+if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+    __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+fi
+
+# The last line
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash

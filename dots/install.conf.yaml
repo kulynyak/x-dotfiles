@@ -13,8 +13,12 @@
       force: true
 
 - link:
-    ~/.profile:
+    ~/dots/profile:
+      path: ~/.profile
+    ~/.bash_profile:
       path: ~/.bashrc
+    ~/dots/bashrc:
+      path: ~/.bashrc 
     ~/.ssh:
     ~/bin: bin
     ~/.zhistory:
