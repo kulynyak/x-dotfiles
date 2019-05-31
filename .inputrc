@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Use case-insensitive TAB autocompletion
 set completion-ignore-case on
@@ -23,7 +23,8 @@ set visible-stats on
 # Immediately add a trailing slash when autocompleting symlinks to directories
 set mark-symlinked-directories on
 
-# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+# Do not autocomplete hidden files unless the pattern explicitly begins with a 
+# dot
 set match-hidden-files off
 
 # Be more intelligent when autocompleting by also looking at the text after
@@ -33,7 +34,8 @@ set skip-completed-text on
 # Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
 set input-meta on
 set output-meta on
-set convert-meta off# Configure option + right arrow to move forward one word in iTerm2
+set convert-meta off 
+# Configure option + right arrow to move forward one word in iTerm2
 # https://www.gnu.org/software/bash/manual/bashref.html#Commands-For-Moving
 "\e\e[C": forward-word
 
