@@ -1,6 +1,6 @@
-# prevent double sourcing
-[[ -n ${__srcprofile__+x} ]] && return
-export __srcprofile__=1
+#!/usr/bin/env zsh
+
+export LANG=en_US.UTF-8
 
 # terminal
 export TERM=screen-256color
@@ -18,6 +18,10 @@ DOTS_BKP="$HOME/Dropbox/sync.dotfiles"
 alias dotbot="dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP"
 
 PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
+
+## gnubin
+# GNU_BIN="/usr/local/opt/coreutils/libexec/gnubin"
+# [[ -d "$GNU_BIN" ]] && PATH="$GNU_BIN:$PATH"
 
 # Java
 export _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true"

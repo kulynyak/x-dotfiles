@@ -3,9 +3,6 @@
 DOT_HUB="https://github.com/kulynyak/x-dotfiles.git"
 HAMMER_HUB="https://github.com/kulynyak/hammerspoon.git"
 
-ZSH_ALIAS_TIP="https://github.com/djui/alias-tips.git"
-ZSH_RA_GIT="https://github.com/kulynyak/ra-git.zsh.git"
-
 set -e
 
 function dropBoxUp2Date() {
@@ -135,24 +132,10 @@ if [ ! -d "$HOME/.hammerspoon" ]; then
   git clone "$HAMMER_HUB" "$HOME/.hammerspoon"
 fi
 
-echo $'\nzsh plugins'
-if [ ! -d "$HOME/dots/z-plugs" ]; then
-  mkdir -p $HOME/dots/z-plugs
-fi
-if [ ! -d "$HOME/dots/z-plugs/alias-tip" ]; then
-  git clone "$ZSH_ALIAS_TIP" "$HOME/dots/z-plugs/alias-tip"
-fi
-if [ ! -d "$HOME/dots/z-plugs/ra-git" ]; then
-  git clone "$ZSH_RA_GIT" "$HOME/dots/z-plugs/ra-git"
-fi
 
-echo $'\nzsh setup'
-if [ ! -d "$HOME/.zim" ]; then
-  git clone --recursive https://github.com/zimfw/zimfw.git "$HOME/.zim"
-fi
 
 echo $'\nInstall zsh and make it the default shell'
-brew install zsh
+brew install zsh zplug
 
 echo $'\nCheck zsh is your default shell'
 if ! grep -q /usr/local/bin/zsh /etc/shells; then
