@@ -6,8 +6,14 @@ export LSCOLORS="Gxfxcxdxbxegedabagacad"
 export CLICOLOR=1
 
 
+# colored grep
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='01;38;5;160'
+
+
 # environment
 source ~/.profile
+
 
 # keyoard
 zmodload zsh/complist
@@ -30,13 +36,17 @@ bindkey "^[[3~"   delete-char
 bindkey "^[3;5~"  delete-char
 bindkey '^[[3;5~' delete-word
 bindkey '^H'      backward-delete-word
-
+# space during searches
+bindkey -M isearch " " magic-space
 
 # edit the current command line in $EDITOR
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 bindkey -M menuselect " " accept-and-menu-complete
+
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
 
 # zplug
 export ZPLUG_LOADFILE="$HOME/dots/zplug.zsh"
@@ -104,6 +114,9 @@ unsetopt clobber            # Do not overwrite existing files with > and >>.
                             # Use >! and >>! to bypass.
 
 
+# ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
+
 # history
 HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000000
@@ -128,10 +141,11 @@ setopt hist_save_no_dups         # Don't write duplicate entries in the history
                                  # file
 setopt hist_reduce_blanks        # Remove superfluous blanks before recording 
                                  # entry
-setopt hist_verify               # Don't execute immediately upon history 
                                  # expansion
 setopt hist_beep                 # Beep when accessing nonexistent history
-
+unsetopt hist_verify             # Don't execute immediately upon history 
+                                 # expansion
+export histignore="j *:v *:vim:nvim:svi:&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g:* --help"
 
 
 
@@ -140,6 +154,17 @@ if [[ "$OSTYPE" == darwin* ]]; then
     export BROWSER='open'
 fi
 
+
+# Set the default Less options.
+# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
+# Remove -X and -F (exit if the content fits on one screen) to enable it.
+# export LESS='-F -g -i -M -R -S -w -X -z-4'
+export LESS='-MQRi'
+# Set the Less input preprocessor.
+# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
+if (( $#commands[(i)lesspipe(|.sh)] )); then
+  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
+fi
 
 # editor
 export EDITOR='nvim'
@@ -249,7 +274,7 @@ function myip() {
 
 function lsgrep() {
   # about 'search through directory contents with grep'
-  ls -l | grep "$*"
+  gls -l | grep -E -i "$*"
 }
 
 function quiet() {
