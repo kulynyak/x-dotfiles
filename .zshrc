@@ -249,8 +249,7 @@ function myip() {
 
 function lsgrep() {
   # about 'search through directory contents with grep'
-  # group 'base'
-  ls | grep "$*"
+  ls -l | grep "$*"
 }
 
 function quiet() {
