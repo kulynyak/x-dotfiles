@@ -36,12 +36,11 @@ HOME_BIN="$HOME/bin"
 [[ -d "$HOME_BIN" ]] && PATH="$HOME_BIN:$PATH"
 
 # gem
-GEM_HOME="$HOME/.gem"
-GEM_PATH="$GEM_HOME/bin"
-if [ -d "$GEM_HOME" ] && [ -d "$GEM_PATH"]; then
-    export GEM_HOME
-    export GEM_PATH
-    PATH="$PATH:$GEM_PATH"
+export GEM_HOME="$HOME/.gem"
+if which gem >/dev/null; then
+    GEM_PATH=$(ruby -e 'puts Gem.user_dir' | sed s/2.3.0/2.6.0/)
+    [[ -d "$GEM_PATH" ]] || mkdir -p $GEM_PATH 
+    PATH="$GEM_PATH:$GEM_PATH/bin:$PATH"
 fi
 
 # gnu man
@@ -50,7 +49,7 @@ MANPATH_GNU="/usr/local/opt/findutils/libexec/gnuman"
 
 # android
 ANDROID_HOME="/usr/local/share/android-sdk"
-if [ -d "$ANDROID_HOME" ]; then
+if [[ -d "$ANDROID_HOME" ]]; then
     export ANDROID_HOME
     PATH="$ANDROID_HOME/platform-tools:$PATH"
 fi

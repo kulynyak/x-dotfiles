@@ -200,6 +200,12 @@ alias x='exit'
 alias zreload='exec zsh'
 alias zclean='trash $ZPLUG_BIN $ZPLUG_REPOS $ZPLUG_CACHE_DIR && exec zsh'
 
+alias txs='tmuxinator start'
+alias txo='tmuxinator open'
+alias txn='tmuxinator new'
+alias txl='tmuxinator list'
+
+
 [[ -x "$(command which redshift)" ]] && \
 alias redshift='killall redshift >/dev/null 2>&1;redshift -t 5800:5100 -l 49:32 -g 0.95 -b .95 >/dev/null 2>&1 &'
 

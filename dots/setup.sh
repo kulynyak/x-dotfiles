@@ -157,6 +157,10 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 echo $'\nContinue with brew bundle'
 brew bundle --file=$HOME/dots/Brewfile
 
+echo $'\nInstall tmuxinator'
+source $HOME/.profile
+gem install tmuxinator
+
 echo $'\nLuarocks modules'
 luarocks install inspect 
 luarocks install luasocket 

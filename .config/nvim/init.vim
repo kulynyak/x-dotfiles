@@ -12,6 +12,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'evidanary/grepg.vim'
 Plug 'neomake/neomake'
 Plug 'tpope/vim-surround'
+Plug 'haishanh/night-owl.vim'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -27,7 +28,8 @@ set ruler          " Ruler on
 set number         " Line numbers on
 
 " turn hybrid line numbers on
-set number relativenumber
+" set number relativenumber
+
 set nu rnu
 
 set nowrap         " Line wrapping off
@@ -35,6 +37,8 @@ set laststatus=2   " Always show the statusline
 set cmdheight=2    " Make the command area two lines high
 set cursorline     " Highlight current line
 set encoding=utf-8
+
+colorscheme night-owl
 
 set showmode
 " set noshowmode     " Don't show the mode since Powerline shows it
