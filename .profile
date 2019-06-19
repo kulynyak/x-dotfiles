@@ -28,7 +28,7 @@ export _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true"
 export JAVA_HOME="$(/usr/libexec/java_home -v 11)"
 export JAVA11_HOME="$(/usr/libexec/java_home -v 11)"
 export JAVA12_HOME="$(/usr/libexec/java_home -v 12)"
-# export JAVA8_HOME="$(/usr/libexec/java_home -v 1.8)"
+export JAVA8_HOME="$(/usr/libexec/java_home -v 1.8)"
 # export JAVA7_HOME="$(/usr/libexec/java_home -v 1.7)"
 
 # bin in home dir
@@ -103,3 +103,5 @@ SCG_SRC="$HOME/svn/syniverse/scg"
 
 # the last one
 export PATH=".:$PATH"
+
+export MOZ_DISABLE_SAFE_MODE_KEY="never"

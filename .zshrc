@@ -145,7 +145,7 @@ setopt hist_reduce_blanks        # Remove superfluous blanks before recording
 setopt hist_beep                 # Beep when accessing nonexistent history
 unsetopt hist_verify             # Don't execute immediately upon history 
                                  # expansion
-export histignore="j *:v *:vim:nvim:svi:&:ls:ll:la:l.:tmux:pwd:exit:clear:clr:[bf]g:* --help"
+export HISTIGNORE="j *:v *:vim:nvim:svi:&:ls:ll:la:l:tmux:pwd:exit:clear:clr:[bf]g:* --help"
 
 
 
@@ -204,10 +204,17 @@ alias txs='tmuxinator start'
 alias txo='tmuxinator open'
 alias txn='tmuxinator new'
 alias txl='tmuxinator list'
+alias txe='tmuxinator stop'
+
+alias kube='tmuxinator start kube'
+alias skube='tmuxinator stop kube'
+alias atmx='tmux attach-session -t 0'
+alias viz='vi ~/.zshrc'
+alias bbd='brew bundle dump --all --file=~/dots/Brewfile --force'
 
 
-[[ -x "$(command which redshift)" ]] && \
-alias redshift='killall redshift >/dev/null 2>&1;redshift -t 5800:5100 -l 49:32 -g 0.95 -b .95 >/dev/null 2>&1 &'
+# [[ -x "$(command which redshift)" ]] && \
+# alias redshift='killall redshift >/dev/null 2>&1;redshift -t 5800:5100 -l 49:24 -g 0.95 -b .95 >/dev/null 2>&1 &'
 
 # set fuck aliases
 if [ -x "$(command which fuck)" ]; then

@@ -30,7 +30,7 @@ set number         " Line numbers on
 " turn hybrid line numbers on
 " set number relativenumber
 
-set nu rnu
+" set nu rnu
 
 set nowrap         " Line wrapping off
 set laststatus=2   " Always show the statusline

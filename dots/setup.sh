@@ -177,4 +177,7 @@ echo $'\nKarabiner setup'
 open /Applications/Karabiner-Elements.app
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Karabiner-Elements.app", hidden:true}' > /dev/null
 
+echo $'\nServices'
+brew services start redshift
+
 echo $'\nSetup is done, please logout/login to start use your new config.'
