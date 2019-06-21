@@ -3,7 +3,7 @@
 DOT_HUB="https://github.com/kulynyak/x-dotfiles.git"
 HAMMER_HUB="https://github.com/kulynyak/hammerspoon.git"
 
-set -e
+# set -e
 
 function dropBoxUp2Date() {
   cat <<'EOF' | osascript 2>/dev/null | sed -E '/Up to date/!d'
