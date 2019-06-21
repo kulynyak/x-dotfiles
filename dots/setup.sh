@@ -56,6 +56,7 @@ brew install rsync
 
 echo $'\nInstall python for dotbot'
 brew install python
+sudo easy_install pip
 echo $'\nInstall dotbot'
 pip install dotbot
 
