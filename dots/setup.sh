@@ -69,9 +69,10 @@ echo $'\nIf you don’t have DropBox installed and synced - script won’t conti
 echo $'\nPlease authorize DropBox with your account credentials.'
 open -a "Dropbox"
 echo $'\nWaiting until DropBox sync is complete...'
-until [ "=Up to date=" = "=$(dropBoxUp2Date)=" ]; do
-  sleep 1
-done
+# TODO fixme
+#until [ "=Up to date=" = "=$(dropBoxUp2Date)=" ]; do
+#  sleep 1
+#done
 echo "DropBox is up to date."
 
 function dir_hnd() {
