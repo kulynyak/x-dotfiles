@@ -171,8 +171,8 @@ source $HOME/.profile
 gem install tmuxinator
 
 echo $'\nLuarocks modules'
-luarocks install inspect 
-luarocks install luasocket 
+luarocks install inspect
+luarocks install luasocket
 luarocks install luautf8
 
 echo $'\nDisable Dock icon for Hammerspoon'
@@ -188,5 +188,8 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 
 echo $'\nServices'
 brew services start redshift
+
+echo $'\n im-select'
+curl -Ls https://raw.githubusercontent.com/daipeihust/im-select/master/install_mac.sh | sh
 
 echo $'\nSetup is done, please logout/login to start use your new config.'
