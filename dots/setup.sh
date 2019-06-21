@@ -57,7 +57,7 @@ brew install rsync
 echo $'\nInstall python for dotbot'
 brew install python
 sudo easy_install pip
-pip install pyyaml
+sudo pip install pyyaml
 echo $'\nInstall dotbot'
 pip install dotbot
 
