@@ -55,11 +55,11 @@ echo $'\nInstall rsync'
 brew install rsync
 
 echo $'\nInstall python for dotbot'
-brew install python
+brew install python@2
 sudo easy_install pip
-sudo pip install pyyaml
+pip install pyyaml
 echo $'\nInstall dotbot'
-pip install dotbot --user
+pip install dotbot
 
 echo $'\nInstall DropBox'
 brew cask install dropbox
