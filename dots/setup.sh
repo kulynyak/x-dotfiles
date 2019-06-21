@@ -3,7 +3,7 @@
 DOT_HUB="https://github.com/kulynyak/x-dotfiles.git"
 HAMMER_HUB="https://github.com/kulynyak/hammerspoon.git"
 
-# set -e
+set -e
 
 function dropBoxUp2Date() {
   cat <<'EOF' | osascript 2>/dev/null | sed -E '/Up to date/!d'
@@ -119,7 +119,8 @@ echo $'\nClone Dotfiles if does not exists'
 if [ ! -d "$HOME/.dotfiles" ]; then
   git clone --separate-git-dir="$HOME/.dotfiles" "$DOT_HUB" tmpdotfiles
   rsync --recursive --verbose --exclude '.git' tmpdotfiles/ "$HOME/"
-  rm -r tmpdotfile
+  sleep 5
+  rm -R tmpdotfile
   git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 fi
 echo $'\nYou can dial with your dotfiles via alias dfs*, or just use dit commands:'
