@@ -48,6 +48,9 @@ brew install moreutils
 echo $'\nInstall GNU find, locate, updatedb, and xargs, g-prefixed.'
 brew install findutils
 
+echo $'\nInstall ruby'
+brew install ruby
+
 echo $'\nInstall git'
 brew install git
 
@@ -56,7 +59,7 @@ brew install rsync
 
 echo $'\nInstall python for dotbot'
 brew install python@2
-sudo easy_install pip
+easy_install pip
 pip install pyyaml
 echo $'\nInstall dotbot'
 pip install dotbot
@@ -69,10 +72,10 @@ echo $'\nIf you don’t have DropBox installed and synced - script won’t conti
 echo $'\nPlease authorize DropBox with your account credentials.'
 open -a "Dropbox"
 echo $'\nWaiting until DropBox sync is complete...'
-# TODO fixme
-#until [ "=Up to date=" = "=$(dropBoxUp2Date)=" ]; do
-#  sleep 1
-#done
+# TODO fixme this works but not perfect
+until [ "=Up to date=" = "=$(dropBoxUp2Date)=" ]; do
+ sleep 1
+done
 echo "DropBox is up to date."
 
 function dir_hnd() {
@@ -119,8 +122,9 @@ echo $'\nClone Dotfiles if does not exists'
 if [ ! -d "$HOME/.dotfiles" ]; then
   git clone --separate-git-dir="$HOME/.dotfiles" "$DOT_HUB" tmpdotfiles
   rsync --recursive --verbose --exclude '.git' tmpdotfiles/ "$HOME/"
-  sleep 5
+  sleep 1
   rm -R tmpdotfile
+  # hide untracked files
   git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 fi
 echo $'\nYou can dial with your dotfiles via alias dfs*, or just use dit commands:'
