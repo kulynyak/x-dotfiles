@@ -24,7 +24,7 @@ if test ! $(which brew); then
   echo "Installing Homebrew for you."
   # Install the correct homebrew for each OS type
   if test "$(uname)" = "Darwin"; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && gecho "Homebrew installed"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && echo "Homebrew installed"
   fi
 fi
 
