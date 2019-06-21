@@ -145,7 +145,7 @@ setopt hist_reduce_blanks        # Remove superfluous blanks before recording
 setopt hist_beep                 # Beep when accessing nonexistent history
 unsetopt hist_verify             # Don't execute immediately upon history 
                                  # expansion
-export HISTIGNORE="j *:v *:vim:nvim:svi:&:ls:ll:la:l:tmux:pwd:exit:clear:clr:[bf]g:* --help"
+export HISTIGNORE="j *:v *:vim:nvim:svi:zvi:up:x:&:ls:ll:la:l:tmux:pwd:exit:clear:zreload:clr:[bf]g:* --help"
 
 
 
