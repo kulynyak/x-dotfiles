@@ -59,7 +59,7 @@ brew install python
 sudo easy_install pip
 sudo pip install pyyaml
 echo $'\nInstall dotbot'
-pip install dotbot
+pip install dotbot --user
 
 echo $'\nInstall DropBox'
 brew cask install dropbox
