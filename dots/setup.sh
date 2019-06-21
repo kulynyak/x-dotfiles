@@ -152,6 +152,7 @@ if [ "=$(dscl . -read $HOME UserShell)=" != "=UserShell: /usr/local/bin/zsh=" ];
 fi
 
 echo $'\nConfigure links'
+export PATH="$PATH:$HOME/Library/Python/2.7/lib/python/site-packages"
 dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP
 
 echo $'Insstall neovim vim-plug'
