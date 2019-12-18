@@ -66,7 +66,7 @@ if ! zplug check --verbose; then
     fi
 fi
 # load plugins
-zplug load 
+zplug load
 
 
 # completions
@@ -98,15 +98,15 @@ fi
 # misc zsh options
 setopt braceccl             # Brace expansion
 setopt interactive_comments # Allow comments even in interactive shells
-setopt nohup                # Don't send the HUP signal to running jobs when 
-                            # the shell exits 
+setopt nohup                # Don't send the HUP signal to running jobs when
+                            # the shell exits
 setopt nobeep               # No beep on error in ZLE
-setopt numericglobsort      # Sort the filenames numerically rather than 
+setopt numericglobsort      # Sort the filenames numerically rather than
                             # lexicographically
-setopt nocaseglob           # Make globbing (filename generation) insensitive 
+setopt nocaseglob           # Make globbing (filename generation) insensitive
                             # to case
-setopt nocheckjobs          # Don't report the status of background and 
-                            # suspended jobs before exiting a shell with job 
+setopt nocheckjobs          # Don't report the status of background and
+                            # suspended jobs before exiting a shell with job
                             # control
 setopt multios              # Write to multiple descriptors.
 setopt extendedglob         # Use extended globbing syntax.
@@ -122,28 +122,28 @@ HISTFILE="$HOME/.zhistory"
 HISTSIZE=10000000
 SAVEHIST=10000000
 LISTMAX=10000000
-setopt bang_hist                 # Treat the '!' character specially during 
+setopt bang_hist                 # Treat the '!' character specially during
                                  # expansion
-setopt extended_history          # Write the history file in the 
+setopt extended_history          # Write the history file in the
                                  # ":start:elapsed;command" format
-setopt inc_append_history        # Write to the history file immediately, 
+setopt inc_append_history        # Write to the history file immediately,
                                  # not when the shell exits
 setopt share_history             # Share history between all sessions
-setopt hist_expire_dups_first    # Expire duplicate entries first when trimming 
+setopt hist_expire_dups_first    # Expire duplicate entries first when trimming
                                  # history
-setopt hist_ignore_dups          # Don't record an entry that was just recorded 
+setopt hist_ignore_dups          # Don't record an entry that was just recorded
                                  # again
-setopt hist_ignore_all_dups      # Delete old recorded entry if new entry is a 
+setopt hist_ignore_all_dups      # Delete old recorded entry if new entry is a
                                  # duplicate
 setopt hist_find_no_dups         # Do not display a line previously found
 setopt hist_ignore_space         # Don't record an entry starting with a space
-setopt hist_save_no_dups         # Don't write duplicate entries in the history 
+setopt hist_save_no_dups         # Don't write duplicate entries in the history
                                  # file
-setopt hist_reduce_blanks        # Remove superfluous blanks before recording 
+setopt hist_reduce_blanks        # Remove superfluous blanks before recording
                                  # entry
                                  # expansion
 setopt hist_beep                 # Beep when accessing nonexistent history
-unsetopt hist_verify             # Don't execute immediately upon history 
+unsetopt hist_verify             # Don't execute immediately upon history
                                  # expansion
 export HISTIGNORE="j *:v *:vim:nvim:svi:zvi:up:x:&:ls:ll:la:l:tmux:pwd:exit:clear:zreload:clr:[bf]g:* --help"
 
@@ -212,6 +212,10 @@ alias atmx='tmux attach-session -t 0'
 alias viz='vi ~/.zshrc'
 alias bbd='brew bundle dump --all --file=~/dots/Brewfile --force'
 
+alias mvns='mvn clean install -Djacoco.skip=true -DskipTests=true; ndone'
+alias mvnc='mvn clean install; ndone'
+
+alias pyshare='python3 -m http.server'
 
 # [[ -x "$(command which redshift)" ]] && \
 # alias redshift='killall redshift >/dev/null 2>&1;redshift -t 5800:5100 -l 49:24 -g 0.95 -b .95 >/dev/null 2>&1 &'
@@ -335,13 +339,13 @@ function sshlist() {
 }
 
 
-# autocompletion
-# kubectl
-(( ${+commands[kubectl]} )) && source <(command kubectl completion zsh)
-# helm
-(( ${+commands[helm]} )) && source <(command helm completion zsh)
-# minikube
-(( ${+commands[minikube]} )) && source <(command minikube completion zsh)
+# # autocompletion
+# # kubectl
+# (( ${+commands[kubectl]} )) && source <(command kubectl completion zsh)
+# # helm
+# (( ${+commands[helm]} )) && source <(command helm completion zsh)
+# # minikube
+# (( ${+commands[minikube]} )) && source <(command minikube completion zsh)
 
 
 # plugin settings
@@ -357,9 +361,10 @@ bindkey '^[[B' history-substring-search-down
 
 # The last lines
 FZF_SHELL=/usr/local/opt/fzf/shell
-# fsf auto-completion
-[[ -f "$FZF_SHELL/completion.zsh" ]] && \
-    source "$FZF_SHELL/completion.zsh" 2> /dev/null
+# # fzf auto-completion
+# [[ -f "$FZF_SHELL/completion.zsh" ]] && \
+#     source "$FZF_SHELL/completion.zsh" 2> /dev/null
 # fzf key bindings
 [[ -f "$FZF_SHELL/key-bindings.zsh" ]] && \
     source "$FZF_SHELL/key-bindings.zsh" 2> /dev/null
+export PATH="/usr/local/opt/node@10/bin:$PATH"

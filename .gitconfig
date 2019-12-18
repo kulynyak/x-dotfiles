@@ -33,13 +33,13 @@
 
 [alias]
   	# Pull + rebase
-  	pr = "!sh -c 'git pull --rebase' -"
+  	pr = !sh -c 'git pull --rebase' -
   	co = checkout
   	ci = commit
   	br = branch
   	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   	tree = log  --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(red)%d%Creset %s %C(yellow dim)(%cr) %C(cyan dim bold)<%an>%Creset' --abbrev-commit --
-  	history = "log --color=always --all --topo-order --pretty='format:%C(yellow)%h%Creset %s%Cred%d%Creset %C(yellow dim)(%cr)%Creset %C(cyan dim bold)<%an>%Creset'"
+  	history = log --color=always --all --topo-order --pretty='format:%C(yellow)%h%Creset %s%Cred%d%Creset %C(yellow dim)(%cr)%Creset %C(cyan dim bold)<%an>%Creset'
   	type = cat-file -t
   	dump = cat-file -p
 
@@ -71,34 +71,34 @@
   	sll = stash-list
   	stll = stash-list --full
   	ss = stash save
-  	sa = "!sh -c 'git stash apply stash@{$1}' -"
-  	sd = "!sh -c 'git stash drop stash@{$1}' -"
-  	sts = "!sh -c 'git stash show -p stash@{$1}' -"
+  	sa = !sh -c 'git stash apply stash@{$1}' -
+  	sd = !sh -c 'git stash drop stash@{$1}' -
+  	sts = !sh -c 'git stash show -p stash@{$1}' -
 
   	# Rebase
-  	rbom = "!sh -c git rebase origin/master"
-  	rbi = "!sh -c 'git rebase -i @~$1' -"
-  	rbc = "!sh -c 'git rebase --continue' -"
-  	rba = "!sh -c 'git rebase --abort' -"
+  	rbom = !sh -c git rebase origin/master
+  	rbi = !sh -c 'git rebase -i @~$1' -
+  	rbc = !sh -c 'git rebase --continue' -
+  	rba = !sh -c 'git rebase --abort' -
 
   	who = shortlog -s --no-merges
-  	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+  	whois = !sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -
   	abbr = "!sh -c 'git rev-list --all | grep ^$1 | while read commit; do git --no-pager show $commit; done' -"
-  	prom = "!sh -c 'git fetch && git pull --rebase origin master' -"
+  	prom = !sh -c 'git fetch && git pull --rebase origin master' -
   	cam = commit -a -m
 
   	# pom = push origin master (not recommended for use)
   	pfm = push origin HEAD:refs/for/master
 
   	# Assume file is unchanged (stop tracking local changes)
-  	auc = "update-index --assume-unchanged"
+  	auc = update-index --assume-unchanged
 
   	# Assume file is changed (start tracking local changes)
-  	ac = "update-index --no-assume-unchanged"
+  	ac = update-index --no-assume-unchanged
 
   	# List all files that are assumed-unchanged (these are different from
   	# ignored files configured through .gitignore)
-  	lsauc= "!sh -c 'git ls-files -v | grep --color=auto \"^[[:lower:]]\"'"
+  	lsauc = !sh -c 'git ls-files -v | grep --color=auto \"^[[:lower:]]\"'
 
   	# Open edited files
   	v = !$EDITOR `git diff --name-only`
@@ -135,3 +135,6 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[filesystem "Oracle Corporation|13|/dev/disk1s5"]
+	timestampResolution = 8000 nanoseconds
+	minRacyThreshold = 0 nanoseconds

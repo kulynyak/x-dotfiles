@@ -171,6 +171,7 @@ source $HOME/.profile
 gem install tmuxinator
 
 echo $'\nLuarocks modules'
+brew install luarocks
 luarocks install inspect
 luarocks install luasocket
 luarocks install luautf8

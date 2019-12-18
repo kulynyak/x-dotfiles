@@ -33,3 +33,21 @@ dependency-reduced-pom.xml
 *.swp
 *.zwc
 *.zwc.old
+
+**/jacoco.exec
+**/.factorypath
+
+**/*.iml
+**/*.ipr
+**/*.iws
+**/.project
+**/.settings
+**/.vscode/*
+
+
+**/scg API test*.*
+**/syniverseReport/*
+**/test-output/*
+**/smpfLog/*
+**/encryption/*
+
