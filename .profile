@@ -132,3 +132,5 @@ fi
 export PATH=".:$PATH"
 
 export MOZ_DISABLE_SAFE_MODE_KEY="never"
+
+export M2_HOME=$(mvn --version | sed 's:.*\(/usr/.*/libexec\).*:\1:gp;d')
