@@ -42,6 +42,24 @@ function up() {
     brew doctor
   }
 
+function d64(){
+    # about 'decode from base64'
+    if [ -z "$1" ]; then
+        echo "No argument supplied"
+        exit 1;
+    fi
+    echo $1 | base64 -D
+}
+
+function e64(){
+    # about 'encode to base64'
+    if [ -z "$1" ]; then
+        echo "No argument supplied"
+        exit 1;
+    fi
+    echo $1 | base64
+}
+
 PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
 
 ## gnubin
