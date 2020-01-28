@@ -27,7 +27,7 @@ HOMEBREW_GITHUB_API_TOKEN_PATH="$HOME/Dropbox/sync.dotfiles/brew.github.token.tx
 function up-cask(){
     # about update outdated casks
     OUTDATED=$(brew cask outdated --greedy --verbose|sed -E '/latest/d'|awk '{print $1}' ORS=' '|tr -d '\n')
-    # echo "outdated=:$OUTDATED:"
+    echo "outdated=:$OUTDATED:"
     [[ ! -z "$OUTDATED" ]] && brew cask reinstall $OUTDATED
 }
 
@@ -68,9 +68,9 @@ PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
 
 # Java
 # export _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true"
-export JAVA_HOME="$(/usr/libexec/java_home -v 11)"
+export JAVA_HOME="$(/usr/libexec/java_home -v 13)"
 # export JAVA11_HOME="$(/usr/libexec/java_home -v 11)"
-# export JAVA12_HOME="$(/usr/libexec/java_home -v 13)"
+# export JAVA13_HOME="$(/usr/libexec/java_home -v 13)"
 # export JAVA8_HOME="$(/usr/libexec/java_home -v 1.8)"
 # export JAVA7_HOME="$(/usr/libexec/java_home -v 1.7)"
 
@@ -146,9 +146,13 @@ fi
 
 [[ -d /usr/local/opt/mongodb@3.4/bin ]] && PATH="/usr/local/opt/mongodb@3.4/bin:$PATH"
 
-# the last one
-export PATH=".:$PATH"
-
 export MOZ_DISABLE_SAFE_MODE_KEY="never"
 
 export M2_HOME=$(mvn --version | sed 's:.*\(/usr/.*/libexec\).*:\1:gp;d')
+
+export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
+
+export PATH="$PATH:$HOME/hacker1/xsser"
+
+# the last one
+export PATH=".:$PATH"

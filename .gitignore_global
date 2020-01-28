@@ -25,7 +25,6 @@ target/
 **/activemq-data/*
 velocity.log
 *.sc
-
 **/src/main/webapp/package-lock.json
 dependency-reduced-pom.xml
 *.war
@@ -51,3 +50,6 @@ dependency-reduced-pom.xml
 **/smpfLog/*
 **/encryption/*
 
+# zpm-zsh/autoenv plugin
+**/.in
+**/.out

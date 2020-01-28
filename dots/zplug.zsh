@@ -17,6 +17,7 @@ zplug "kulynyak/zsh.osx-alias"
 # zplug "kulynyak/zsh.kubectl-alias"
 zplug "kulynyak/zsh.maven-alias"
 zplug "plugins/fasd", from:oh-my-zsh
+zplug "zpm-zsh/autoenv"
 zplug "djui/alias-tips"
 zplug "nojhan/liquidprompt"
 # zplug "plugins/git",   from:oh-my-zsh
