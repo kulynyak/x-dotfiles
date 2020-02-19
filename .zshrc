@@ -210,10 +210,7 @@ alias kube='tmuxinator start kube'
 alias skube='tmuxinator stop kube'
 alias atmx='tmux attach-session -t 0'
 alias viz='vi ~/.zshrc'
-alias bbd='brew bundle dump --all --file=~/dots/Brewfile --force'
 
-alias mvns='mvn clean install -Djacoco.skip=true -DskipTests=true; ndone'
-alias mvnc='mvn clean install; ndone'
 
 alias pyshare='python3 -m http.server'
 
@@ -338,6 +335,10 @@ function sshlist() {
   awk '$1 ~ /Host$/ {for (i=2; i<=NF; i++) print $i}' ~/.ssh/config
 }
 
+function mvn(){
+    time command mvn "$@"; ndone; lmk
+}
+
 
 # # autocompletion
 # # kubectl
@@ -368,3 +369,5 @@ FZF_SHELL=/usr/local/opt/fzf/shell
 [[ -f "$FZF_SHELL/key-bindings.zsh" ]] && \
     source "$FZF_SHELL/key-bindings.zsh" 2> /dev/null
 export PATH="/usr/local/opt/node@10/bin:$PATH"
+
+[[ -s "/usr/local/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh

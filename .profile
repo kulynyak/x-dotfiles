@@ -17,6 +17,7 @@ alias dfsl="dfs ls-tree -r master --name-only"
 alias dfsla="dfs log --pretty=format: --name-only --diff-filter=A | sort - | sed '/^$/d'"
 DOTS_BKP="$HOME/Dropbox/sync.dotfiles"
 alias dotbot="dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP"
+alias bbd='brew bundle dump --all --file=~/dots/Brewfile --force'
 
 alias flushdns='sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache'
 
@@ -28,7 +29,7 @@ function up-cask(){
     # about update outdated casks
     OUTDATED=$(brew cask outdated --greedy --verbose|sed -E '/latest/d'|awk '{print $1}' ORS=' '|tr -d '\n')
     echo "outdated=:$OUTDATED:"
-    [[ ! -z "$OUTDATED" ]] && brew cask reinstall $OUTDATED
+    [[ ! -z "$OUTDATED" ]] && brew cask reinstall ${=OUTDATED}
 }
 
 function up() {
@@ -148,7 +149,7 @@ fi
 
 export MOZ_DISABLE_SAFE_MODE_KEY="never"
 
-export M2_HOME=$(mvn --version | sed 's:.*\(/usr/.*/libexec\).*:\1:gp;d')
+export M2_HOME=$(command mvn --version | sed 's:.*\(/usr/.*/libexec\).*:\1:gp;d')
 
 export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
 
