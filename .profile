@@ -17,9 +17,13 @@ alias dfsl="dfs ls-tree -r master --name-only"
 alias dfsla="dfs log --pretty=format: --name-only --diff-filter=A | sort - | sed '/^$/d'"
 DOTS_BKP="$HOME/Dropbox/sync.dotfiles"
 alias dotbot="dotbot -c $HOME/dots/install.conf.yaml -d $DOTS_BKP"
-alias bbd='brew bundle dump --all --file=~/dots/Brewfile --force'
+alias bbd='brew bundle dump --all --force --file=$HOME/dots/Brewfile'
 
 alias flushdns='sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache'
+
+alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.argv[1]))"'
+
+alias urlencode='python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))"'
 
 # set the github API token for homebrew
 HOMEBREW_GITHUB_API_TOKEN_PATH="$HOME/Dropbox/sync.dotfiles/brew.github.token.txt"
@@ -69,8 +73,8 @@ PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
 
 # Java
 # export _JAVA_OPTIONS="-Djava.net.preferIPv4Stack=true"
-export JAVA_HOME="$(/usr/libexec/java_home -v 13)"
-# export JAVA11_HOME="$(/usr/libexec/java_home -v 11)"
+# export JAVA_HOME="$(/usr/libexec/java_home -v 13)"
+export JAVA11_HOME="$(/usr/libexec/java_home -v 11)"
 # export JAVA13_HOME="$(/usr/libexec/java_home -v 13)"
 # export JAVA8_HOME="$(/usr/libexec/java_home -v 1.8)"
 # export JAVA7_HOME="$(/usr/libexec/java_home -v 1.7)"
@@ -122,22 +126,22 @@ if [ -d "$RUBY_PATH" ]; then
 fi
 
 # icu4c
-ICU4_PATH="/usr/local/opt/icu4c"
-if [ -d "$ICU4_PATH" ]; then
-    export LDFLAGS="$LDFLAGS -L$ICU4_PATH/lib"
-    export CPPFLAGS="$CPPFLAGS -I$ICU4_PATH/include"
-    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$ICU4_PATH/lib/pkgconfig"
-    PATH="$ICU4_PATH/bin:$ICU4_PATH/sbin:${PATH}"
-fi
+# ICU4_PATH="/usr/local/opt/icu4c"
+# if [ -d "$ICU4_PATH" ]; then
+#     export LDFLAGS="$LDFLAGS -L$ICU4_PATH/lib"
+#     export CPPFLAGS="$CPPFLAGS -I$ICU4_PATH/include"
+#     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$ICU4_PATH/lib/pkgconfig"
+#     PATH="$ICU4_PATH/bin:$ICU4_PATH/sbin:${PATH}"
+# fi
 
 # sqlite
-SQLITE_PATH="/usr/local/opt/sqlite"
-if [ -d "$SQLITE_PATH" ]; then
-    export LDFLAGS="$LDFLAGS -L$SQLITE_PATH/lib"
-    export CPPFLAGS="$CPPFLAGS -I$SQLITE_PATH/include"
-    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$SQLITE_PATH/lib/pkgconfig"
-    PATH="$SQLITE_PATH/bin:$PATH"
-fi
+# SQLITE_PATH="/usr/local/opt/sqlite"
+# if [ -d "$SQLITE_PATH" ]; then
+#     export LDFLAGS="$LDFLAGS -L$SQLITE_PATH/lib"
+#     export CPPFLAGS="$CPPFLAGS -I$SQLITE_PATH/include"
+#     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$SQLITE_PATH/lib/pkgconfig"
+#     PATH="$SQLITE_PATH/bin:$PATH"
+# fi
 
 # syniverse
 # SCG_SRC="$HOME/svn/syniverse/scg"

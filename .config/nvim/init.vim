@@ -34,7 +34,7 @@ set number         " Line numbers on
 
 set nowrap         " Line wrapping off
 set laststatus=2   " Always show the statusline
-set cmdheight=2    " Make the command area two lines high
+set cmdheight=1    " Make the command area two lines high
 set cursorline     " Highlight current line
 set encoding=utf-8
 
@@ -232,8 +232,8 @@ nnoremap <silent> <cr> :put=''<cr>
 " Select entire buffer
 nnoremap vaa ggvGg_
 
-" Go to the position of the last change in this file"
-nnoremap gI `
+" Go to the position of the last change in this file
+nnoremap gI `.
 
 " Abbreviations
 " no one is really happy until you have this shortcuts

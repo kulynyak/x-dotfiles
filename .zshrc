@@ -369,5 +369,3 @@ FZF_SHELL=/usr/local/opt/fzf/shell
 [[ -f "$FZF_SHELL/key-bindings.zsh" ]] && \
     source "$FZF_SHELL/key-bindings.zsh" 2> /dev/null
 export PATH="/usr/local/opt/node@10/bin:$PATH"
-
-[[ -s "/usr/local/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh
