@@ -99,7 +99,7 @@ function file_hnd() {
       mkdir -p "$sync_file_dir"
     fi
     if [ -f "$dot_file" ]; then
-      cp "$dot_file" "$sync_file"
+      ln "$sync_file" "$dot_file"
     else
       touch "$sync_file"
     fi
@@ -113,8 +113,7 @@ if [ ! -d "$DOTS_BKP" ]; then
 fi
 dir_hnd "$HOME/bin" "$DOTS_BKP/bin"
 dir_hnd "$HOME/.ssh" "$DOTS_BKP/ssh"
-file_hnd "$HOME/.bash_history" "$DOTS_BKP" "bash_history"
-file_hnd "$HOME/.zhistory" "$DOTS_BKP" "zhistory"
+file_hnd "$HOME/.zsh_history" "$DOTS_BKP" "zsh_history"
 file_hnd "$HOME/.fasd" "$DOTS_BKP" "fasd"
 dir_hnd "$HOME/.kube" "$DOTS_BKP/kube"
 
