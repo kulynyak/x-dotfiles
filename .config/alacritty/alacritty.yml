@@ -29,15 +29,15 @@ window:
   # Window dimensions in character columns and lines
   # (changes require restart)
   dimensions:
-    columns: 210
-    lines: 58
+    columns: 211
+    lines: 59
 
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
   padding:
-    x: 2
-    y: 2
+    x: 1
+    y: 1
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
@@ -47,7 +47,7 @@ window:
   decorations: full
 
 # When true, bold text is drawn using the bright variant of colors.
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -62,21 +62,18 @@ scrolling:
 font:
   # The normal (roman) font face to use.
   normal:
-    # family: SF Mono
-    family: Meslo LG S for Powerline
+    family: 'MesloLGS NF'
     style: Regular
 
   # The bold font face
   bold:
-    # family: SF Mono
-    family: Meslo LG S for Powerline
+    family: 'MesloLGS NF'
     style: Bold
 
   # The italic font face
   italic:
-    # family: SF Mono
-    family: Meslo LG S for Powerline
-    style: Regular Italic
+    family: 'MesloLGS NF'
+    style: Italic
 
   # Point size of the font
   size: 13.0
@@ -84,7 +81,7 @@ font:
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
-    x: 0
+    x: 1
     y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
@@ -105,6 +102,36 @@ debug:
 
 # >> themes
 schemes:
+  onehalf-light: &onehalf-light
+    # Cursor colors
+    cursor:
+      cursor: '#d30761'
+
+    # Colors (One Half Light)
+    primary:
+      background: '0xfafafa'
+      foreground: '0x383a42'
+
+    normal:
+      black: '0x383a42'
+      red: '0xe45649'
+      green: '0x50a14f'
+      yellow: '0xc18401'
+      blue: '0x0184bc'
+      magenta: '0xa626a4'
+      cyan: '0x0997b3'
+      white: '0xfafafa'
+
+    bright:
+      black: '0x383a42'
+      red: '0xe45649'
+      green: '0x50a14f'
+      yellow: '0xc18401'
+      blue: '0x0184bc'
+      magenta: '0xa626a4'
+      cyan: '0x0997b3'
+      white: '0xfafafa'
+
   afterglow: &afterglow
     # Default colors
     primary:
@@ -891,9 +918,11 @@ schemes:
       white:   '#f1f1f1'
 
 # << themes
-colors: *pencil
+# colors: *pencil
 # colors: *seagull
-# colors: *solarized_mine
+colors: *onehalf-light
+# colors: *terminal
+# colors: *ayu_dark
 
 # Visual Bell
 #

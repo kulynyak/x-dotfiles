@@ -1,6 +1,6 @@
 " Force 256 color mode if available
-if $TERM =~ '-256color'
-   set t_Co=256
+if !has('gui_running')
+  set t_Co=256
 endif
 
 " ---------------
@@ -12,7 +12,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'evidanary/grepg.vim'
 Plug 'neomake/neomake'
 Plug 'tpope/vim-surround'
+Plug 'edkolev/tmuxline.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'haishanh/night-owl.vim'
+Plug 'lifepillar/vim-solarized8'
+Plug 'romainl/flattened'
+Plug 'rakr/vim-one'
+Plug 'sonph/onehalf'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -38,10 +44,143 @@ set cmdheight=1    " Make the command area two lines high
 set cursorline     " Highlight current line
 set encoding=utf-8
 
-colorscheme night-owl
+set background=light
+"colorscheme one
+colorscheme onehalflight
 
-set showmode
-" set noshowmode     " Don't show the mode since Powerline shows it
+let g:tmuxline_powerline_separators = 1
+" ---------------------
+let g:lightline = {
+    \ 'colorscheme': 'onehalfdark',
+    \ 'component': {
+    \ 'lineinfo': ' %3l:%-2v',
+    \ },
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+    \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+    \ },
+    \ 'component_function': {
+    \   'fugitive': 'LightlineFugitive',
+    \   'filename': 'LightlineFilename',
+    \   'fileformat': 'LightlineFileformat',
+    \   'filetype': 'LightlineFiletype',
+    \   'fileencoding': 'LightlineFileencoding',
+    \   'mode': 'LightlineMode',
+    \   'ctrlpmark': 'CtrlPMark',
+    \ },
+    \ 'component_expand': {
+    \   'syntastic': 'SyntasticStatuslineFlag',
+    \ },
+    \ 'component_type': {
+    \   'syntastic': 'error',
+    \ },
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' }
+    \ }
+
+function! LightlineModified()
+  return &ft ==# 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightlineFilename()
+  let fname = expand('%:t')
+  return fname ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+        \ fname =~# '^__Tagbar__\|__Gundo\|NERD_tree' ? '' :
+        \ &ft ==# 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft ==# 'unite' ? unite#get_status_string() :
+        \ &ft ==# 'vimshell' ? vimshell#get_status_string() :
+        \ (LightlineReadonly() !=# '' ? LightlineReadonly() . ' ' : '') .
+        \ (fname !=# '' ? fname : '[No Name]') .
+        \ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*FugitiveHead')
+      let mark = ''  " edit here for cool mark
+      let branch = FugitiveHead()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  let fname = expand('%:t')
+  return fname =~# '^__Tagbar__' ? 'Tagbar' :
+        \ fname ==# 'ControlP' ? 'CtrlP' :
+        \ fname ==# '__Gundo__' ? 'Gundo' :
+        \ fname ==# '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~# 'NERD_tree' ? 'NERDTree' :
+        \ &ft ==# 'unite' ? 'Unite' :
+        \ &ft ==# 'vimfiler' ? 'VimFiler' :
+        \ &ft ==# 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlPStatusFunc_1',
+  \ 'prog': 'CtrlPStatusFunc_2',
+  \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+  return lightline#statusline(0)
+endfunction
+
+" Syntastic can call a post-check hook, let's update lightline there
+" For more information: :help syntastic-loclist-callback
+function! SyntasticCheckHook(errors)
+  call lightline#update()
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
+" ---------------
+
+"set showmode
+set noshowmode     " Don't show the mode since Powerline shows it
 set title          " Set the title of the window in the terminal to the file
 if exists('+colorcolumn')
   highlight ColorColumn ctermbg=7
@@ -279,9 +418,7 @@ augroup fast_quit
 augroup END
 
 
-
-
-" --------------- 
+" ---------------
 " neomake
 " ---------------
 " When writing a buffer (no delay).
@@ -293,3 +430,9 @@ call neomake#configure#automake('rw', 1000)
 " Full config: when writing or reading a buffer, and on changes in insert and
 " normal mode (after 1s; no delay when writing).
 call neomake#configure#automake('nrwi', 500)
+
+" ---------------
+" Reloads vimrc
+" ---------------
+nnoremap <Leader>v :e $MYVIMRC<cr>
+

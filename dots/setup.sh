@@ -129,20 +129,15 @@ fi
 echo $'\nYou can dial with your dotfiles via alias dfs*, or just use dit commands:'
 echo "git --git-dir=\$HOME/.dotfiles/ --work-tree=\$HOME <command>"
 
-echo $'\nTmux setup'
-if [ ! -d "$HOME/dots/tmux" ]; then
-  git clone https://github.com/gpakosz/.tmux.git "$HOME/dots/tmux"
-fi
-
 echo $'\nHammerspoon setup'
 if [ ! -d "$HOME/.hammerspoon" ]; then
   git clone "$HAMMER_HUB" "$HOME/.hammerspoon"
 fi
 
-
-
-echo $'\nInstall zsh and make it the default shell'
-brew install zsh zplug
+echo $'\nPrezto (zsh) setup'
+if [ ! -d "$HOME/.zprezto" ]; then
+  git clone https://github.com/kulynyak/prezto.git "$HOME/.zprezto"
+fi
 
 echo $'\nCheck zsh is your default shell'
 if ! grep -q /usr/local/bin/zsh /etc/shells; then

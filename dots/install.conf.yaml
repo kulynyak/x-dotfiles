@@ -24,8 +24,10 @@
       path: ~/.config/nvim
     ~/.vimrc:
       path: ~/.config/nvim/init.vim
-    ~/.tmux.conf:
-      path: ~/dots/tmux/.tmux.conf
+    ~/dots/tmux.conf:
+      path: ~/.tmux.conf
+    ~/dots/p10k.zsh:
+      path: ~/.p10k.zsh
     ~/dots/hammerspoon:
       path: ~/.hammerspoon
     ~/.kube:
