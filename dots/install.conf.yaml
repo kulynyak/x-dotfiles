@@ -16,7 +16,6 @@
     ~/.ssh:
     ~/bin: bin
     ~/.zhistory:
-    ~/.bash_history:
     ~/.fasd:
     ~/dots/nvim:
       path: ~/.config/nvim

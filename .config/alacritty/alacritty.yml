@@ -30,7 +30,7 @@ window:
   # (changes require restart)
   dimensions:
     columns: 211
-    lines: 59
+    lines: 60
 
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
@@ -40,7 +40,7 @@ window:
     y: 1
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
@@ -76,13 +76,13 @@ font:
     style: Italic
 
   # Point size of the font
-  size: 13.0
+  size: 14
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
     x: 1
-    y: 0
+    y: -1
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
@@ -100,829 +100,41 @@ debug:
   # Should display the render timer
   render_timer: false
 
-# >> themes
-schemes:
-  onehalf-light: &onehalf-light
-    # Cursor colors
-    cursor:
-      cursor: '#d30761'
-
-    # Colors (One Half Light)
-    primary:
-      background: '0xfafafa'
-      foreground: '0x383a42'
-
-    normal:
-      black: '0x383a42'
-      red: '0xe45649'
-      green: '0x50a14f'
-      yellow: '0xc18401'
-      blue: '0x0184bc'
-      magenta: '0xa626a4'
-      cyan: '0x0997b3'
-      white: '0xfafafa'
-
-    bright:
-      black: '0x383a42'
-      red: '0xe45649'
-      green: '0x50a14f'
-      yellow: '0xc18401'
-      blue: '0x0184bc'
-      magenta: '0xa626a4'
-      cyan: '0x0997b3'
-      white: '0xfafafa'
-
-  afterglow: &afterglow
-    # Default colors
-    primary:
-      background: '#2c2c2c'
-      foreground: '#d6d6d6'
-
-      dim_foreground:    '#dbdbdb'
-      bright_foreground: '#d9d9d9'
-      dim_background:    '#202020' # not sure
-      bright_background: '#3a3a3a' # not sure
-
-    # Cursor colors
-    cursor:
-      text:   '#2c2c2c'
-      cursor: '#d9d9d9'
-
-    # Normal colors
-    normal:
-      black:   '#1c1c1c'
-      red:     '#bc5653'
-      green:   '#909d63'
-      yellow:  '#ebc17a'
-      blue:    '#7eaac7'
-      magenta: '#aa6292'
-      cyan:    '#86d3ce'
-      white:   '#cacaca'
-
-    # Bright colors
-    bright:
-      black:   '#636363'
-      red:     '#bc5653'
-      green:   '#909d63'
-      yellow:  '#ebc17a'
-      blue:    '#7eaac7'
-      magenta: '#aa6292'
-      cyan:    '#86d3ce'
-      white:   '#f7f7f7'
-
-    # Dim colors
-    dim:
-      black:   '#232323'
-      red:     '#74423f'
-      green:   '#5e6547'
-      yellow:  '#8b7653'
-      blue:    '#556b79'
-      magenta: '#6e4962'
-      cyan:    '#5c8482'
-      white:   '#828282'
-
-  argonaut: &argonaut
-    # Default colors
-    primary:
-      background: '#292C3E'
-      foreground: '#EBEBEB'
-
-    # Cursor colors
-    cursor:
-      text: '#FF261E'
-      cursor: '#FF261E'
-
-    # Normal colors
-    normal:
-      black:   '#0d0d0d'
-      red:     '#FF301B'
-      green:   '#A0E521'
-      yellow:  '#FFC620'
-      blue:    '#1BA6FA'
-      magenta: '#8763B8'
-      cyan:    '#21DEEF'
-      white:   '#EBEBEB'
-
-    # Bright colors
-    bright:
-      black:   '#6D7070'
-      red:     '#FF4352'
-      green:   '#B8E466'
-      yellow:  '#FFD750'
-      blue:    '#1BA6FA'
-      magenta: '#A578EA'
-      cyan:    '#73FBF1'
-      white:   '#FEFEF8'
-
-  ayu_dark: &ayu_dark
-    # Default colors
-    primary:
-      background: '#0A0E14'
-      foreground: '#B3B1AD'
-
-    # Normal colors
-    normal:
-      black: '#01060E'
-      red: '#EA6C73'
-      green: '#91B362'
-      yellow: '#F9AF4F'
-      blue: '#53BDFA'
-      magenta: '#FAE994'
-      cyan: '#90E1C6'
-      white: '#C7C7C7'
-
-    # Bright colors
-    bright:
-      black: '#686868'
-      red: '#F07178'
-      green: '#C2D94C'
-      yellow: '#FFB454'
-      blue: '#59C2FF'
-      magenta: '#FFEE99'
-      cyan: '#95E6CB'
-      white: '#FFFFFF'
-
-  blood_moon: &blood_moon # nice
-    # Default colors
-    primary:
-      background: '#10100E'
-      foreground: '#C6C6C4'
-
-    # Normal colors
-    normal:
-      black:   '#10100E'
-      red:     '#C40233'
-      green:   '#009F6B'
-      yellow:  '#FFD700'
-      blue:    '#0087BD'
-      magenta: '#9A4EAE'
-      cyan:    '#20B2AA'
-      white:   '#C6C6C4'
-
-    # Bright colors
-    bright:
-      black:   '#696969'
-      red:     '#FF2400'
-      green:   '#03C03C'
-      yellow:  '#FDFF00'
-      blue:    '#007FFF'
-      magenta: '#FF1493'
-      cyan:    '#00CCCC'
-      white:   '#FFFAFA'
-
-  kde_breeze: &kde_breeze
-    # Default colors
-    primary:
-      background: '#232627'
-      foreground: '#fcfcfc'
-
-      dim_foreground: '#eff0f1'
-      bright_foreground: '#ffffff'
-      dim_background: '#31363b'
-      bright_background: '#000000'
-
-    # Normal colors
-    normal:
-      black: '#232627'
-      red: '#ed1515'
-      green: '#11d116'
-      yellow: '#f67400'
-      blue: '#1d99f3'
-      magenta: '#9b59b6'
-      cyan: '#1abc9c'
-      white: '#fcfcfc'
-
-    # Bright colors
-    bright:
-      black: '#7f8c8d'
-      red: '#c0392b'
-      green: '#1cdc9a'
-      yellow: '#fdbc4b'
-      blue: '#3daee9'
-      magenta: '#8e44ad'
-      cyan: '#16a085'
-      white: '#ffffff'
-
-    # Dim colors
-    dim:
-      black: '#31363b'
-      red: '#783228'
-      green: '#17a262'
-      yellow: '#b65619'
-      blue: '#1b668f'
-      magenta: '#614a73'
-      cyan: '#186c60'
-      white: '#63686d'
-
-  cobalt2: &cobalt2
-    cursor:
-      text: '#fefff2'
-      cursor: '#f0cc09'
-
-    selection:
-      text: '#b5b5b5'
-      background: '#18354f'
-
-    primary:
-      background: '#132738'
-      foreground: '#ffffff'
-
-    normal:
-      black:   '#000000'
-      red:     '#ff0000'
-      green:   '#38de21'
-      yellow:  '#ffe50a'
-      blue:    '#1460d2'
-      magenta: '#ff005d'
-      cyan:    '#00bbbb'
-      white:   '#bbbbbb'
-
-    bright:
-      black:   '#555555'
-      red:     '#f40e17'
-      green:   '#3bd01d'
-      yellow:  '#edc809'
-      blue:    '#5555ff'
-      magenta: '#ff55ff'
-      cyan:    '#6ae3fa'
-      white:   '#ffffff'
-
-  darkside: &darkside
-    primary:
-      background: "#222324"
-      foreground: "#BABABA"
-
-    # Normal colors
-    normal:
-      black:    "#000000"
-      red:      "#E8341C"
-      green:    "#68C256"
-      yellow:   "#F2D42C"
-      blue:     "#1C98E8"
-      magenta:  "#8E69C9"
-      cyan:     "#1C98E8"
-      white:    "#BABABA"
-
-    # Bright colors
-    bright:
-      black:    "#666666"
-      red:      "#E05A4F"
-      green:    "#77B869"
-      yellow:   "#EFD64B"
-      blue:     "#387CD3"
-      magenta:  "#957BBE"
-      cyan:     "#3D97E2"
-      white:    "#BABABA"
-
-  darktooth: &darktooth
-    # Default colors
-    primary:
-      background: '#282828'
-      foreground: '#fdf4c1'
-
-    # Normal colors
-    normal:
-      black:   '#282828'
-      red:     '#9d0006'
-      green:   '#79740e'
-      yellow:  '#b57614'
-      blue:    '#076678'
-      magenta: '#8f3f71'
-      cyan:    '#00a7af'
-      white:   '#fdf4c1'
-
-    # Bright colors
-    bright:
-      black:   '#32302f'
-      red:     '#fb4933'
-      green:   '#b8bb26'
-      yellow:  '#fabd2f'
-      blue:    '#83a598'
-      magenta: '#d3869b'
-      cyan:    '#3fd7e5'
-      white:   '#ffffc8'
-
-    # Dim colors (Optional)
-    dim:
-      black:   '#1d2021'
-      red:     '#421e1e'
-      green:   '#232b0f'
-      yellow:  '#4d3b27'
-      blue:    '#2b3c44'
-      magenta: '#4e3d45'
-      cyan:    '#205161'
-      white:   '#f4e8ba'
-
-  dracula: &dracula
-    # Default colors
-    primary:
-      background: '#282a36'
-      foreground: '#f8f8f2'
-
-    # Normal colors
-    normal:
-      black:   '#000000'
-      red:     '#ff5555'
-      green:   '#50fa7b'
-      yellow:  '#f1fa8c'
-      blue:    '#caa9fa'
-      magenta: '#ff79c6'
-      cyan:    '#8be9fd'
-      white:   '#bfbfbf'
-
-    # Bright colors
-    bright:
-      black:   '#575b70'
-      red:     '#ff6e67'
-      green:   '#5af78e'
-      yellow:  '#f4f99d'
-      blue:    '#caa9fa'
-      magenta: '#ff92d0'
-      cyan:    '#9aedfe'
-      white:   '#e6e6e6'
-
-  gruvbox_light: &gruvbox_light
-    # Default colors
-    primary:
-      # hard contrast: background = '#f9f5d7'
-      background: '#fbf1c7'
-      # soft contrast: background = '#f2e5bc'
-      foreground: '#3c3836'
-
-    # Normal colors
-    normal:
-      black:   '#fbf1c7'
-      red:     '#cc241d'
-      green:   '#98971a'
-      yellow:  '#d79921'
-      blue:    '#458588'
-      magenta: '#b16286'
-      cyan:    '#689d6a'
-      white:   '#7c6f64'
-
-    # Bright colors
-    bright:
-      black:   '#928374'
-      red:     '#9d0006'
-      green:   '#79740e'
-      yellow:  '#b57614'
-      blue:    '#076678'
-      magenta: '#8f3f71'
-      cyan:    '#427b58'
-      white:   '#3c3836'
-
-  gruvbox_dark: &gruvbox_dark
-    # Default colors
-    primary:
-      # hard contrast: background = '#1d2021'
-      background: '#282828'
-      # soft contrast: background = '#32302f'
-      foreground: '#ebdbb2'
-
-    # Normal colors
-    normal:
-      black:   '#282828'
-      red:     '#cc241d'
-      green:   '#98971a'
-      yellow:  '#d79921'
-      blue:    '#458588'
-      magenta: '#b16286'
-      cyan:    '#689d6a'
-      white:   '#a89984'
-
-    # Bright colors
-    bright:
-      black:   '#928374'
-      red:     '#fb4934'
-      green:   '#b8bb26'
-      yellow:  '#fabd2f'
-      blue:    '#83a598'
-      magenta: '#d3869b'
-      cyan:    '#8ec07c'
-      white:   '#ebdbb2'
-
-  jellybeans: &jellybeans # nice
-    # Default colors
-    primary:
-      background: '#161616'
-      foreground: '#e4e4e4'
-
-    # Cursor volors
-    cursor:
-      text: '#feffff'
-      cursor: '#ffb472'
-
-    # Normal colors
-    normal:
-      black:   '#a3a3a3'
-      red:     '#e98885'
-      green:   '#a3c38b'
-      yellow:  '#ffc68d'
-      blue:    '#a6cae2'
-      magenta: '#e7cdfb'
-      cyan:    '#00a69f'
-      white:   '#e4e4e4'
-
-    # Bright colors
-    bright:
-      black:   '#c8c8c8'
-      red:     '#ffb2b0'
-      green:   '#c8e2b9'
-      yellow:  '#ffe1af'
-      blue:    '#bddff7'
-      magenta: '#fce2ff'
-      cyan:    '#0bbdb6'
-      white:   '#feffff'
-
-    # Selection colors
-    selection:
-      text: '#5963a2'
-      background: '#f6f6f6'
-
-  kitty: &kitty # cool dark
-    # Default colors
-    primary:
-      background: '#000000'
-      foreground: '#dddddd'
-
-    # Normal colors
-    normal:
-      black:   '#000000'
-      red:     '#cc0403'
-      green:   '#19cb00'
-      yellow:  '#cecb00'
-      blue:    '#0d73cc'
-      magenta: '#cb1ed1'
-      cyan:    '#0dcdcd'
-      white:   '#dddddd'
-
-    # Bright colors
-    bright:
-      black:   '#767676'
-      red:     '#f2201f'
-      green:   '#23fd00'
-      yellow:  '#fffd00'
-      blue:    '#1a8fff'
-      magenta: '#fd28ff'
-      cyan:    '#14ffff'
-      white:   '#ffffff'
-
-  matherial: &matherial # dark
-    # Default colors
-    primary:
-      background: '#1e282d'
-      foreground: '#c4c7d1'
-
-    # Normal colors
-    normal:
-      black:   '#666666'
-      red:     '#eb606b'
-      green:   '#c3e88d'
-      yellow:  '#f7eb95'
-      blue:    '#80cbc4'
-      magenta: '#ff2f90'
-      cyan:    '#aeddff'
-      white:   '#ffffff'
-
-    # Bright colors
-    bright:
-      black:   '#ff262b'
-      red:     '#eb606b'
-      green:   '#c3e88d'
-      yellow:  '#f7eb95'
-      blue:    '#7dc6bf'
-      magenta: '#6c71c4'
-      cyan:    '#35434d'
-      white:   '#ffffff'
-
-  molokai: &molokai # cool dark
-    # Default colors
-    primary:
-      background: '#1B1D1E'
-      foreground: '#F8F8F2'
-    # Normal colors
-    normal:
-      black:   '#333333'
-      red:     '#C4265E'
-      green:   '#86B42B'
-      yellow:  '#B3B42B'
-      blue:    '#6A7EC8'
-      magenta: '#8C6BC8'
-      cyan:    '#56ADBC'
-      white:   '#E3E3DD'
-    # Bright colors
-    bright:
-      black:   '#666666'
-      red:     '#F92672'
-      green:   '#A6E22E'
-      yellow:  '#E2E22E'
-      blue:    '#819AFF'
-      magenta: '#AE81FF'
-      cyan:    '#66D9EF'
-      white:   '#F8F8F2'
-
-  monokai: &monokai # bad dark
-    # Default colors
-    primary:
-      background: '#272822'
-      foreground: '#F8F8F2'
-
-    # Normal colors
-    normal:
-      black:   '#272822'
-      red:     '#F92672'
-      green:   '#A6E22E'
-      yellow:  '#F4BF75'
-      blue:    '#66D9EF'
-      magenta: '#AE81FF'
-      cyan:    '#A1EFE4'
-      white:   '#F8F8F2'
-
-    # Bright colors
-    bright:
-      black:   '#75715E'
-      red:     '#F92672'
-      green:   '#A6E22E'
-      yellow:  '#F4BF75'
-      blue:    '#66D9EF'
-      magenta: '#AE81FF'
-      cyan:    '#A1EFE4'
-      white:   '#F9F8F5'
-
-  monokai_pro: &monokai_pro # bad dark
-    # Default colors
-    primary:
-      background: '#2D2A2E'
-      foreground: '#FCFCFA'
-
-    # Normal colors
-    normal:
-      black:   '#403E41'
-      red:     '#FF6188'
-      green:   '#A9DC76'
-      yellow:  '#FFD866'
-      blue:    '#FC9867'
-      magenta: '#AB9DF2'
-      cyan:    '#78DCE8'
-      white:   '#FCFCFA'
-
-    # Bright colors
-    bright:
-      black:   '#727072'
-      red:     '#FF6188'
-      green:   '#A9DC76'
-      yellow:  '#FFD866'
-      blue:    '#FC9867'
-      magenta: '#AB9DF2'
-      cyan:    '#78DCE8'
-      white:   '#FCFCFA'
-
-  monokai_soda: &monokai_soda # neutral dark
-    # Default colors
-    primary:
-      background: '#1a1a1a'
-      foreground: '#c4c5b5'
-
-    # Normal colors
-    normal:
-      black:   '#1a1a1a'
-      red:     '#f4005f'
-      green:   '#98e024'
-      yellow:  '#fa8419'
-      blue:    '#9d65ff'
-      magenta: '#f4005f'
-      cyan:    '#58d1eb'
-      white:   '#c4c5b5'
-
-    # Bright colors
-    bright:
-      black:   '#625e4c'
-      red:     '#f4005f'
-      green:   '#98e024'
-      yellow:  '#e0d561'
-      blue:    '#9d65ff'
-      magenta: '#f4005f'
-      cyan:    '#58d1eb'
-      white:   '#f6f6ef'
-
-  new_moon: &new_moon # neutral dark
-    # Default colors
-    primary:
-      background: '#2D2D2D'
-      foreground: '#B3B9C5'
-    # Normal colors
-    normal:
-      black: '#2D2D2D'
-      red: '#F2777A'
-      green: '#92D192'
-      yellow: '#FFD479'
-      blue: '#6AB0F3'
-      magenta: '#E1A6F2'
-      cyan: '#76D4D6'
-      white: '#B3B9C5'
-    # Bright colors
-    bright:
-      black: '#777C85'
-      red: '#F2777A'
-      green: '#76D4D6'
-      yellow: '#FFEEA6'
-      blue: '#6AB0F3'
-      magenta: '#E1A6F2'
-      cyan: '#76D4D6'
-      white: '#FFFFFF'
-
-  nord: &nord # bad dark
-    # Default colors
-    primary:
-      background: '#2E3440'
-      foreground: '#D8DEE9'
-
-    # Normal colors
-    normal:
-      black:   '#3B4252'
-      red:     '#BF616A'
-      green:   '#A3BE8C'
-      yellow:  '#EBCB8B'
-      blue:    '#81A1C1'
-      magenta: '#B48EAD'
-      cyan:    '#88C0D0'
-      white:   '#E5E9F0'
-
-    # Bright colors
-    bright:
-      black:   '#4C566A'
-      red:     '#BF616A'
-      green:   '#A3BE8C'
-      yellow:  '#EBCB8B'
-      blue:    '#81A1C1'
-      magenta: '#B48EAD'
-      cyan:    '#8FBCBB'
-      white:   '#ECEFF4'
-
-  terminal: &terminal # cool light
-    primary:
-      background: "#FFFFFF"
-      foreground: "#000000"
-    normal:
-      black:      "#000000"
-      red:        "#990000"
-      green:      "#00A600"
-      yellow:     "#999900"
-      blue:       "#0000B2"
-      magenta:    "#B200B2"
-      cyan:       "#00A6B2"
-      white:      "#BFBFBF"
-    bright:
-      black:      "#666666"
-      red:        "#E50000"
-      green:      "#00D900"
-      yellow:     "#E5E500"
-      blue:       "#0000FF"
-      magenta:    "#E500E5"
-      cyan:       "#00E5E5"
-      white:      "#E5E5E5"
-
-  solarized_mine: &solarized_mine # cool light
-    # Default colors
-    primary:
-      background: '#fef8e5' # base3
-      foreground: '#657b83' # base00
-
-    # Cursor colors
-    cursor:
-      text:   '#fef8e5' # base3
-      cursor: '#657b83' # base00
-
-    # Normal colors
-    normal:
-      black:   '#073642' # base02
-      red:     '#dc322f' # red
-      green:   '#859900' # green
-      yellow:  '#dfa459' # yellow
-      blue:    '#268bd2' # blue
-      magenta: '#d33682' # magenta
-      cyan:    '#2aa198' # cyan
-      white:   '#eee8d5' # base2
-
-    # Bright colors
-    bright:
-      black:   '#859ba3' # base03
-      red:     '#cb4b16' # orange
-      green:   '#586e75' # base01
-      yellow:  '#ffd479' # base00
-      blue:    '#839496' # base0
-      magenta: '#6c71c4' # violet
-      cyan:    '#93a1a1' # base1
-      white:   '#fdf6e3' # base3
-
-  solarized_light:  &solarized_light # bad light
-    # Default colors
-    primary:
-      background: '#fdf6e3' # base3
-      foreground: '#657b83' # base00
-
-    # Cursor colors
-    cursor:
-      text:   '#fdf6e3' # base3
-      cursor: '#657b83' # base00
-
-    # Normal colors
-    normal:
-      black:   '#073642' # base02
-      red:     '#dc322f' # red
-      green:   '#859900' # green
-      yellow:  '#b58900' # yellow
-      blue:    '#268bd2' # blue
-      magenta: '#d33682' # magenta
-      cyan:    '#2aa198' # cyan
-      white:   '#eee8d5' # base2
-
-    # Bright colors
-    bright:
-      black:   '#002b36' # base03
-      red:     '#cb4b16' # orange
-      green:   '#586e75' # base01
-      yellow:  '#657b83' # base00
-      blue:    '#839496' # base0
-      magenta: '#6c71c4' # violet
-      cyan:    '#93a1a1' # base1
-      white:   '#fdf6e3' # base3
-
-  seagull: &seagull # cool light
-    # Default colors
-    primary:
-      background: '#ffffff'
-      foreground: '#61707a'
-
-    # Normal colors
-    normal:
-      black:   '#0b141a'
-      red:     '#ff4053'
-      green:   '#11ab00'
-      yellow:  '#bf8c00'
-      blue:    '#0099ff'
-      magenta: '#9854ff'
-      cyan:    '#00a5ab'
-      white:   '#ffffff'
-
-    # Bright colors
-    bright:
-      # black:   '#0b141a'
-      black:   '#859ba3'
-      red:     '#ff4053'
-      green:   '#11ab00'
-      yellow:  '#ffd479'
-      blue:    '#0099ff'
-      magenta: '#9854ff'
-      cyan:    '#00a5ab'
-      white:   '#ffffff'
-
-  pencil : &pencil # cool light
-    # Selection colors
-    #
-    # Colors which should be used to draw the selection area. If selection
-    # background is unset, selection color will be the inverse of the cell colors.
-    # If only text is unset the cell text color will remain the same.
-    #selection:
-    #  text: '#eaeaea'
-    #  background: '#404040'
-
-    # Default Colors
-    primary:
-      background: '#f1f1f1'
-      foreground: '#424242'
-    # Cursor colors
-    cursor:
-      cursor: '#d30761'
-
-    # Normal colors
-    normal:
-      black:   '#212121'
-      red:     '#c30771'
-      green:   '#10a778'
-      yellow:  '#a89c14'
-      blue:    '#008ec4'
-      magenta: '#523c79'
-      cyan:    '#20a5ba'
-      white:   '#e0e0e0'
-    # Bright colors
-    bright:
-      # black:   '#212121'
-      black:   '#859ba3'
-      red:     '#fb007a'
-      green:   '#5fd7af'
-      yellow:  '#bf8c00'
-      blue:    '#20bbfc'
-      magenta: '#6855de'
-      cyan:    '#4fb8cc'
-      white:   '#f1f1f1'
-
-# << themes
-# colors: *pencil
-# colors: *seagull
-colors: *onehalf-light
-# colors: *terminal
-# colors: *ayu_dark
+#+begin_theme
+ # Kitty dark
+colors:
+  # Cursor volors
+  cursor:
+    cursor: '#d30761'
+    text: '#fefff2'
+
+  # Default colors
+  primary:
+    background: '#020202'
+    foreground: '#dddddd'
+
+  # Normal colors
+  normal:
+    black:   '#020202'
+    red:     '#cc0403'
+    green:   '#16ca00'
+    yellow:  '#cecb00'
+    blue:    '#0d73cc'
+    magenta: '#cb1ed1'
+    cyan:    '#0dcdcd'
+    white:   '#dddddd'
+
+  # Bright colors
+  bright:
+    black:   '#767676'
+    red:     '#f2201f'
+    green:   '#20fa00'
+    yellow:  '#fffd00'
+    blue:    '#1a8fff'
+    magenta: '#fd28ff'
+    cyan:    '#14ffff'
+    white:   '#ffffff'
+#+end_theme
 
 # Visual Bell
 #
@@ -951,7 +163,7 @@ visual_bell:
   duration: 1
 
 # Background opacity
-background_opacity: 1
+background_opacity: 0.85
 
 # Mouse bindings
 #
@@ -997,7 +209,7 @@ mouse:
     #modifiers: Control|Shift
 
 selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
 
   # When set to `true`, selected text will be copied to both the primary and
   # the selection clipboard. Otherwise, it will only be copied to the selection
@@ -1014,7 +226,7 @@ cursor:
   #   - _ Underline
   #   - | Beam
   style: Block
-  thickness: 0.26
+  thickness: 0.25
   unfocused_hollow: true
 
 # Live config reload (changes require restart)
@@ -1056,129 +268,133 @@ live_config_reload: true
 #     strings. For example:
 #     - { ... , command: { program: "alacritty", args: ["-e", "vttest"] } }
 key_bindings:
-  - { key: V,        mods: Command, action: Paste                        }
-  - { key: C,        mods: Command, action: Copy                         }
-  - { key: Q,        mods: Command, action: Quit                         }
-  - { key: N,        mods: Command, command: { program: "open", args: ["-nb", "io.alacritty"] } }
-  - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
-  - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
-  - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
-  - { key: End,                     chars: "\x1b[F",   mode: ~AppCursor  }
-  - { key: Key0,     mods: Command, action: ResetFontSize                }
-  - { key: Equals,   mods: Command, action: IncreaseFontSize             }
-  - { key: Minus,    mods: Command, action: DecreaseFontSize             }
-  - { key: PageUp,   mods: Shift,   chars: "\x1b[5;2~"                   }
-  - { key: PageUp,   mods: Control, chars: "\x1b[5;5~"                   }
-  - { key: PageUp,                  chars: "\x1b[5~"                     }
-  - { key: PageDown, mods: Shift,   chars: "\x1b[6;2~"                   }
-  - { key: PageDown, mods: Control, chars: "\x1b[6;5~"                   }
-  - { key: PageDown,                chars: "\x1b[6~"                     }
-  - { key: Tab,      mods: Shift,   chars: "\x1b[Z"                      }
-  - { key: Back,                    chars: "\x7f"                        }
-  - { key: Back,     mods: Alt,     chars: "\x1b\x7f"                    }
-  - { key: Insert,                  chars: "\x1b[2~"                     }
-  - { key: Delete,                  chars: "\x1b[3~"                     }
-  - { key: Left,     mods: Shift,   chars: "\x1b[1;2D"                   }
-  - { key: Left,     mods: Control, chars: "\x1b[1;5D"                   }
-  - { key: Left,     mods: Alt,     chars: "\x1b[1;3D"                   }
+  - { key: V, mods: Command, action: Paste }
+  - { key: C, mods: Command, action: Copy }
+  - { key: Q, mods: Command, action: Quit }
+  - {
+      key: N,
+      mods: Command,
+      command: { program: 'open', args: ['-nb', 'io.alacritty'] },
+    }
+  - { key: Home, chars: "\x1bOH", mode: AppCursor }
+  - { key: Home, chars: "\x1b[H", mode: ~AppCursor }
+  - { key: End, chars: "\x1bOF", mode: AppCursor }
+  - { key: End, chars: "\x1b[F", mode: ~AppCursor }
+  - { key: Key0, mods: Command, action: ResetFontSize }
+  - { key: Equals, mods: Command, action: IncreaseFontSize }
+  - { key: Minus, mods: Command, action: DecreaseFontSize }
+  - { key: PageUp, mods: Shift, chars: "\x1b[5;2~" }
+  - { key: PageUp, mods: Control, chars: "\x1b[5;5~" }
+  - { key: PageUp, chars: "\x1b[5~" }
+  - { key: PageDown, mods: Shift, chars: "\x1b[6;2~" }
+  - { key: PageDown, mods: Control, chars: "\x1b[6;5~" }
+  - { key: PageDown, chars: "\x1b[6~" }
+  - { key: Tab, mods: Shift, chars: "\x1b[Z" }
+  - { key: Back, chars: "\x7f" }
+  - { key: Back, mods: Alt, chars: "\x1b\x7f" }
+  - { key: Insert, chars: "\x1b[2~" }
+  - { key: Delete, chars: "\x1b[3~" }
+  - { key: Left, mods: Shift, chars: "\x1b[1;2D" }
+  - { key: Left, mods: Control, chars: "\x1b[1;5D" }
+  - { key: Left, mods: Alt, chars: "\x1b[1;3D" }
   # - { key: Left,                    chars: "\x1b[D",   mode: ~AppCursor  }
   # - { key: Left,                    chars: "\x1bOD",   mode: AppCursor   }
-  - { key: Right,    mods: Shift,   chars: "\x1b[1;2C"                   }
-  - { key: Right,    mods: Control, chars: "\x1b[1;5C"                   }
-  - { key: Right,    mods: Alt,     chars: "\x1b[1;3C"                   }
+  - { key: Right, mods: Shift, chars: "\x1b[1;2C" }
+  - { key: Right, mods: Control, chars: "\x1b[1;5C" }
+  - { key: Right, mods: Alt, chars: "\x1b[1;3C" }
   # - { key: Right,                   chars: "\x1b[C",   mode: ~AppCursor  }
   # - { key: Right,                   chars: "\x1bOC",   mode: AppCursor   }
-  - { key: Up,       mods: Shift,   chars: "\x1b[1;2A"                   }
-  - { key: Up,       mods: Control, chars: "\x1b[1;5A"                   }
-  - { key: Up,       mods: Alt,     chars: "\x1b[1;3A"                   }
+  - { key: Up, mods: Shift, chars: "\x1b[1;2A" }
+  - { key: Up, mods: Control, chars: "\x1b[1;5A" }
+  - { key: Up, mods: Alt, chars: "\x1b[1;3A" }
   # - { key: Up,                      chars: "\x1b[A",   mode: ~AppCursor  }
   # - { key: Up,                      chars: "\x1bOA",   mode: AppCursor   }
-  - { key: Down,     mods: Shift,   chars: "\x1b[1;2B"                   }
-  - { key: Down,     mods: Control, chars: "\x1b[1;5B"                   }
-  - { key: Down,     mods: Alt,     chars: "\x1b[1;3B"                   }
+  - { key: Down, mods: Shift, chars: "\x1b[1;2B" }
+  - { key: Down, mods: Control, chars: "\x1b[1;5B" }
+  - { key: Down, mods: Alt, chars: "\x1b[1;3B" }
   # - { key: Down,                    chars: "\x1b[B",   mode: ~AppCursor  }
   # - { key: Down,                    chars: "\x1bOB",   mode: AppCursor   }
-  - { key: F1,                      chars: "\x1bOP"                      }
-  - { key: F2,                      chars: "\x1bOQ"                      }
-  - { key: F3,                      chars: "\x1bOR"                      }
-  - { key: F4,                      chars: "\x1bOS"                      }
-  - { key: F5,                      chars: "\x1b[15~"                    }
-  - { key: F6,                      chars: "\x1b[17~"                    }
-  - { key: F7,                      chars: "\x1b[18~"                    }
-  - { key: F8,                      chars: "\x1b[19~"                    }
-  - { key: F9,                      chars: "\x1b[20~"                    }
-  - { key: F10,                     chars: "\x1b[21~"                    }
-  - { key: F11,                     chars: "\x1b[23~"                    }
-  - { key: F12,                     chars: "\x1b[24~"                    }
-  - { key: F1,       mods: Shift,   chars: "\x1b[1;2P"                   }
-  - { key: F2,       mods: Shift,   chars: "\x1b[1;2Q"                   }
-  - { key: F3,       mods: Shift,   chars: "\x1b[1;2R"                   }
-  - { key: F4,       mods: Shift,   chars: "\x1b[1;2S"                   }
-  - { key: F5,       mods: Shift,   chars: "\x1b[15;2~"                  }
-  - { key: F6,       mods: Shift,   chars: "\x1b[17;2~"                  }
-  - { key: F7,       mods: Shift,   chars: "\x1b[18;2~"                  }
-  - { key: F8,       mods: Shift,   chars: "\x1b[19;2~"                  }
-  - { key: F9,       mods: Shift,   chars: "\x1b[20;2~"                  }
-  - { key: F10,      mods: Shift,   chars: "\x1b[21;2~"                  }
-  - { key: F11,      mods: Shift,   chars: "\x1b[23;2~"                  }
-  - { key: F12,      mods: Shift,   chars: "\x1b[24;2~"                  }
-  - { key: F1,       mods: Control, chars: "\x1b[1;5P"                   }
-  - { key: F2,       mods: Control, chars: "\x1b[1;5Q"                   }
-  - { key: F3,       mods: Control, chars: "\x1b[1;5R"                   }
-  - { key: F4,       mods: Control, chars: "\x1b[1;5S"                   }
-  - { key: F5,       mods: Control, chars: "\x1b[15;5~"                  }
-  - { key: F6,       mods: Control, chars: "\x1b[17;5~"                  }
-  - { key: F7,       mods: Control, chars: "\x1b[18;5~"                  }
-  - { key: F8,       mods: Control, chars: "\x1b[19;5~"                  }
-  - { key: F9,       mods: Control, chars: "\x1b[20;5~"                  }
-  - { key: F10,      mods: Control, chars: "\x1b[21;5~"                  }
-  - { key: F11,      mods: Control, chars: "\x1b[23;5~"                  }
-  - { key: F12,      mods: Control, chars: "\x1b[24;5~"                  }
-  - { key: F1,       mods: Alt,     chars: "\x1b[1;6P"                   }
-  - { key: F2,       mods: Alt,     chars: "\x1b[1;6Q"                   }
-  - { key: F3,       mods: Alt,     chars: "\x1b[1;6R"                   }
-  - { key: F4,       mods: Alt,     chars: "\x1b[1;6S"                   }
-  - { key: F5,       mods: Alt,     chars: "\x1b[15;6~"                  }
-  - { key: F6,       mods: Alt,     chars: "\x1b[17;6~"                  }
-  - { key: F7,       mods: Alt,     chars: "\x1b[18;6~"                  }
-  - { key: F8,       mods: Alt,     chars: "\x1b[19;6~"                  }
-  - { key: F9,       mods: Alt,     chars: "\x1b[20;6~"                  }
-  - { key: F10,      mods: Alt,     chars: "\x1b[21;6~"                  }
-  - { key: F11,      mods: Alt,     chars: "\x1b[23;6~"                  }
-  - { key: F12,      mods: Alt,     chars: "\x1b[24;6~"                  }
-  - { key: F1,       mods: Command, chars: "\x1b[1;3P"                   }
-  - { key: F2,       mods: Command, chars: "\x1b[1;3Q"                   }
-  - { key: F3,       mods: Command, chars: "\x1b[1;3R"                   }
-  - { key: F4,       mods: Command, chars: "\x1b[1;3S"                   }
-  - { key: F5,       mods: Command, chars: "\x1b[15;3~"                  }
-  - { key: F6,       mods: Command, chars: "\x1b[17;3~"                  }
-  - { key: F7,       mods: Command, chars: "\x1b[18;3~"                  }
-  - { key: F8,       mods: Command, chars: "\x1b[19;3~"                  }
-  - { key: F9,       mods: Command, chars: "\x1b[20;3~"                  }
-  - { key: F10,      mods: Command, chars: "\x1b[21;3~"                  }
-  - { key: F11,      mods: Command, chars: "\x1b[23;3~"                  }
-  - { key: F12,      mods: Command, chars: "\x1b[24;3~"                  }
-  - { key: D,        mods: Command,       chars: "\x06\x76" }
-  - { key: D,        mods: Command|Shift, chars: "\x06\x73" }
-  - { key: W,        mods: Command,       chars: "\x06\x78" }
-  - { key: H,        mods: Command,       chars: "\x06\x68" }
-  - { key: J,        mods: Command,       chars: "\x06\x6a" }
-  - { key: K,        mods: Command,       chars: "\x06\x6b" }
-  - { key: L,        mods: Command,       chars: "\x06\x6c" }
-  - { key: T,        mods: Command,       chars: "\x06\x63" }
+  - { key: F1, chars: "\x1bOP" }
+  - { key: F2, chars: "\x1bOQ" }
+  - { key: F3, chars: "\x1bOR" }
+  - { key: F4, chars: "\x1bOS" }
+  - { key: F5, chars: "\x1b[15~" }
+  - { key: F6, chars: "\x1b[17~" }
+  - { key: F7, chars: "\x1b[18~" }
+  - { key: F8, chars: "\x1b[19~" }
+  - { key: F9, chars: "\x1b[20~" }
+  - { key: F10, chars: "\x1b[21~" }
+  - { key: F11, chars: "\x1b[23~" }
+  - { key: F12, chars: "\x1b[24~" }
+  - { key: F1, mods: Shift, chars: "\x1b[1;2P" }
+  - { key: F2, mods: Shift, chars: "\x1b[1;2Q" }
+  - { key: F3, mods: Shift, chars: "\x1b[1;2R" }
+  - { key: F4, mods: Shift, chars: "\x1b[1;2S" }
+  - { key: F5, mods: Shift, chars: "\x1b[15;2~" }
+  - { key: F6, mods: Shift, chars: "\x1b[17;2~" }
+  - { key: F7, mods: Shift, chars: "\x1b[18;2~" }
+  - { key: F8, mods: Shift, chars: "\x1b[19;2~" }
+  - { key: F9, mods: Shift, chars: "\x1b[20;2~" }
+  - { key: F10, mods: Shift, chars: "\x1b[21;2~" }
+  - { key: F11, mods: Shift, chars: "\x1b[23;2~" }
+  - { key: F12, mods: Shift, chars: "\x1b[24;2~" }
+  - { key: F1, mods: Control, chars: "\x1b[1;5P" }
+  - { key: F2, mods: Control, chars: "\x1b[1;5Q" }
+  - { key: F3, mods: Control, chars: "\x1b[1;5R" }
+  - { key: F4, mods: Control, chars: "\x1b[1;5S" }
+  - { key: F5, mods: Control, chars: "\x1b[15;5~" }
+  - { key: F6, mods: Control, chars: "\x1b[17;5~" }
+  - { key: F7, mods: Control, chars: "\x1b[18;5~" }
+  - { key: F8, mods: Control, chars: "\x1b[19;5~" }
+  - { key: F9, mods: Control, chars: "\x1b[20;5~" }
+  - { key: F10, mods: Control, chars: "\x1b[21;5~" }
+  - { key: F11, mods: Control, chars: "\x1b[23;5~" }
+  - { key: F12, mods: Control, chars: "\x1b[24;5~" }
+  - { key: F1, mods: Alt, chars: "\x1b[1;6P" }
+  - { key: F2, mods: Alt, chars: "\x1b[1;6Q" }
+  - { key: F3, mods: Alt, chars: "\x1b[1;6R" }
+  - { key: F4, mods: Alt, chars: "\x1b[1;6S" }
+  - { key: F5, mods: Alt, chars: "\x1b[15;6~" }
+  - { key: F6, mods: Alt, chars: "\x1b[17;6~" }
+  - { key: F7, mods: Alt, chars: "\x1b[18;6~" }
+  - { key: F8, mods: Alt, chars: "\x1b[19;6~" }
+  - { key: F9, mods: Alt, chars: "\x1b[20;6~" }
+  - { key: F10, mods: Alt, chars: "\x1b[21;6~" }
+  - { key: F11, mods: Alt, chars: "\x1b[23;6~" }
+  - { key: F12, mods: Alt, chars: "\x1b[24;6~" }
+  - { key: F1, mods: Command, chars: "\x1b[1;3P" }
+  - { key: F2, mods: Command, chars: "\x1b[1;3Q" }
+  - { key: F3, mods: Command, chars: "\x1b[1;3R" }
+  - { key: F4, mods: Command, chars: "\x1b[1;3S" }
+  - { key: F5, mods: Command, chars: "\x1b[15;3~" }
+  - { key: F6, mods: Command, chars: "\x1b[17;3~" }
+  - { key: F7, mods: Command, chars: "\x1b[18;3~" }
+  - { key: F8, mods: Command, chars: "\x1b[19;3~" }
+  - { key: F9, mods: Command, chars: "\x1b[20;3~" }
+  - { key: F10, mods: Command, chars: "\x1b[21;3~" }
+  - { key: F11, mods: Command, chars: "\x1b[23;3~" }
+  - { key: F12, mods: Command, chars: "\x1b[24;3~" }
+  - { key: D, mods: Command, chars: "\x06\x76" }
+  - { key: D, mods: Command|Shift, chars: "\x06\x73" }
+  - { key: W, mods: Command, chars: "\x06\x78" }
+  - { key: H, mods: Command, chars: "\x06\x68" }
+  - { key: J, mods: Command, chars: "\x06\x6a" }
+  - { key: K, mods: Command, chars: "\x06\x6b" }
+  - { key: L, mods: Command, chars: "\x06\x6c" }
+  - { key: T, mods: Command, chars: "\x06\x63" }
   - { key: RBracket, mods: Command|Shift, chars: "\x06\x6e" }
   - { key: LBracket, mods: Command|Shift, chars: "\x06\x70" }
-  - { key: Return,   mods: Command|Shift, chars: "\x06\x7a" }
-  - { key: Key1,     mods: Command,       chars: "\x06\x31" }
-  - { key: Key2,     mods: Command,       chars: "\x06\x32" }
-  - { key: Key3,     mods: Command,       chars: "\x06\x33" }
-  - { key: Key4,     mods: Command,       chars: "\x06\x34" }
-  - { key: Key5,     mods: Command,       chars: "\x06\x35" }
-  - { key: Key6,     mods: Command,       chars: "\x06\x36" }
-  - { key: Key7,     mods: Command,       chars: "\x06\x37" }
-  - { key: Key8,     mods: Command,       chars: "\x06\x38" }
-  - { key: Key9,     mods: Command,       chars: "\x06\x39" }
-  - { key: Left,     mods: Command,       chars: "\x06\x48" }
-  - { key: Down,     mods: Command,       chars: "\x06\x4a" }
-  - { key: Up,       mods: Command,       chars: "\x06\x4b" }
-  - { key: Right,    mods: Command,       chars: "\x06\x4c" }
+  - { key: Return, mods: Command|Shift, chars: "\x06\x7a" }
+  - { key: Key1, mods: Command, chars: "\x06\x31" }
+  - { key: Key2, mods: Command, chars: "\x06\x32" }
+  - { key: Key3, mods: Command, chars: "\x06\x33" }
+  - { key: Key4, mods: Command, chars: "\x06\x34" }
+  - { key: Key5, mods: Command, chars: "\x06\x35" }
+  - { key: Key6, mods: Command, chars: "\x06\x36" }
+  - { key: Key7, mods: Command, chars: "\x06\x37" }
+  - { key: Key8, mods: Command, chars: "\x06\x38" }
+  - { key: Key9, mods: Command, chars: "\x06\x39" }
+  - { key: Left, mods: Command, chars: "\x06\x48" }
+  - { key: Down, mods: Command, chars: "\x06\x4a" }
+  - { key: Up, mods: Command, chars: "\x06\x4b" }
+  - { key: Right, mods: Command, chars: "\x06\x4c" }
