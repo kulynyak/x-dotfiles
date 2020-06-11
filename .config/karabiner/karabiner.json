@@ -18,7 +18,7 @@
           {
             "manipulators": [
               {
-                "description": "Change caps_lock to Hyper (i.e., command+control+option+shift)",
+                "description": "Change caps_lock to ctrl+option+cmd + Key, or f19",
                 "from": {
                   "key_code": "caps_lock",
                   "modifiers": {
@@ -27,8 +27,8 @@
                 },
                 "to": [
                   {
-                    "key_code": "left_shift",
-                    "modifiers": ["left_command", "left_control", "right_option"]
+                    "key_code": "right_option",
+                    "modifiers": ["left_command", "left_control" ]
                   }
                 ],
                 "to_if_alone": [
@@ -37,6 +37,33 @@
                   }
                 ],
                 "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Change r-cmd to ctrl+option+cmd+shift + Key, or Esc",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "right_command",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_shift",
+                    "modifiers": ["right_command", "left_control", "right_option"]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "escape"
+                  }
+                ]
               }
             ]
           }

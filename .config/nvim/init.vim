@@ -295,10 +295,10 @@
   " Can be typed even faster than jj, and if you are already in normal mode, you (usually) don't accidentally move:
   if !exists('g:vscode')
       " ordinary neovim
-      " :imap jk <Esc>
-      " :imap kj <Esc>
-      :imap ;; <Esc>
-      :inoremap ;; <Esc>
+      :imap jk <Esc>
+      :imap kj <Esc>
+      " :imap ;; <Esc>
+      " :inoremap ;; <Esc>
   endif
 
   " Easy saving
@@ -396,7 +396,7 @@
   nnoremap Q gqa
 
   " Switch between the last two files
-  nnoremap <leader><leader> <C-^>
+  " nnoremap <leader><leader> <C-^>
 
   " Shortcut to edit THIS configuration file: (e)dit (c)onfiguration
   nnoremap <silent> <leader>ec :e $MYVIMRC<CR>

@@ -1,11 +1,20 @@
 
 " :source ~/.ideavimrc
 
+set nocompatible    
 set ignorecase
 set smartcase
 set scrolloff=3         " 3 lines above/below cursor when scrolling
-
+set colorcolumn=+1
+set formatoptions+=j    
 set nu rnu
+set sc 
+set lazyredraw
+set ttyfast
+
+set notimeout
+set ttimeout
+set ttimeoutlen=10
 
 let mapleader = " "
 
@@ -34,13 +43,14 @@ set textobj-entire
 set surround
 
 " Integrate with system clipboard
-set clipboard=unnamedplus,unnamed
+" set clipboard=unnamedplus,unnamed
+set clipboard+=unnamed
 
-imap ;; <Esc>
-inoremap ;; <Esc>
+" imap ;; <Esc>
+" inoremap ;; <Esc>
 
-" imap jk <Esc>
-" imap kj <Esc>
+imap jk <Esc>
+imap kj <Esc>
 
 " Use Q for formatting the current paragraph (or visual selection)
 vmap Q gq
