@@ -139,3 +139,5 @@
 [filesystem "Oracle Corporation|13|/dev/disk1s5"]
 	timestampResolution = 8000 nanoseconds
 	minRacyThreshold = 0 nanoseconds
+[url "git://"]
+	insteadOf = https://

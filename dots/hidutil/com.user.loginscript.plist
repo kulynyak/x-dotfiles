@@ -17,6 +17,8 @@
   </dict>
 </plist>
 <!-- 
+cp ./com.user.loginscript.plist ~/Library/LaunchAgents/
+rm ~/Library/LaunchAgents/com.user.loginscript.plist
 launchctl unload ~/Library/LaunchAgents/com.user.loginscript.plist
 launchctl load ~/Library/LaunchAgents/com.user.loginscript.plist
  -->
