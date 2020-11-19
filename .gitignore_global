@@ -40,5 +40,3 @@
 **/webapp/renderedJs
 \#*\#
 x-dev/**
-**/docker-compose.yml
-**/admin-ui/ngconfig.json

@@ -70,14 +70,13 @@ font:
   bold:
     family: 'MesloLGS NF'
     style: Bold
-
   # The italic font face
   italic:
     family: 'MesloLGS NF'
     style: Italic
 
   # Point size of the font
-  size: 14
+  size: 15
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -103,19 +102,13 @@ debug:
 
 #+begin_theme
 colors:
+  selection:
+    text: '#000000'
+    background: '#ffffff'
 
   cursor:
-   text: CellBackground
-   cursor: CellForeground
-
-  # cursor:
-  #   text: '#000000'
-  #   cursor: '#dddddd'
-
-  # # Default colors
-  # primary:
-  #   background: '#000000'
-  #   foreground: '#dddddd'
+    text: CellBackground
+    cursor: CellForeground
 
   # Normal colors
   normal:
@@ -167,7 +160,7 @@ bell:
   duration: 1
 
 # Background opacity
-background_opacity: 0.85
+background_opacity: 0.95
 
 # Mouse bindings
 #
@@ -228,7 +221,7 @@ cursor:
   #   - _ Underline
   #   - | Beam
   style: Underline
-  thickness: 0.15
+  thickness: 0.14
   unfocused_hollow: true
 
 # Live config reload (changes require restart)
