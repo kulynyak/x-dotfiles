@@ -30,8 +30,8 @@ window:
   # Window dimensions in character columns and lines
   # (changes require restart)
   dimensions:
-    columns: 211
-    lines: 60
+    columns: 209
+    lines: 61
 
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
@@ -45,7 +45,7 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: full
+  decorations: none
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: false
@@ -76,7 +76,7 @@ font:
     style: Italic
 
   # Point size of the font
-  size: 15
+  size: 13
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
