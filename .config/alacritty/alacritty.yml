@@ -26,7 +26,7 @@ shell:
     # - tmux
 
 window:
-  dynamic_title: true
+  dynamic_title: false
   # Window dimensions in character columns and lines
   # (changes require restart)
   dimensions:
@@ -281,7 +281,7 @@ key_bindings:
   - { key: PageDown, mods: Control, chars: "\e[6;5~" }
   - { key: PageDown, chars: "\e[6~" }
   - { key: Tab, mods: Shift, chars: "\e[Z" }
-  - { key: Back, chars: "" }
+  - { key: Back, chars: '' }
   - { key: Back, mods: Alt, chars: "\e" }
   - { key: Insert, chars: "\e[2~" }
   - { key: Delete, chars: "\e[3~" }

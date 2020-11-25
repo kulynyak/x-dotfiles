@@ -1,7 +1,7 @@
 {
     "global": {
         "check_for_updates_on_startup": true,
-        "show_in_menu_bar": false,
+        "show_in_menu_bar": true,
         "show_profile_name_in_menu_bar": false
     },
     "profiles": [
@@ -15,37 +15,6 @@
                     "mouse_motion_to_scroll.speed": 100
                 },
                 "rules": [
-                    {
-                        "description": "Change space to ⌃+⌥+⌘+⇧ + Key, or space",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_shift",
-                                        "modifiers": [
-                                            "right_command",
-                                            "left_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "spacebar"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
                     {
                         "description": "Change r-⌘ to ⌘+key, or Esc",
                         "manipulators": [
@@ -73,7 +42,7 @@
                         ]
                     },
                     {
-                        "description": "Change caps_lock to ⌃+⌥+⌘+key, or F19",
+                        "description": "Change caps_lock to ⌃+⌥+⌘+⇧ key, or F19",
                         "manipulators": [
                             {
                                 "from": {
@@ -89,7 +58,8 @@
                                         "key_code": "right_option",
                                         "modifiers": [
                                             "left_command",
-                                            "left_control"
+                                            "left_control",
+                                            "right_shift"
                                         ]
                                     }
                                 ],
