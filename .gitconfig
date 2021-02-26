@@ -112,6 +112,7 @@
 
 [http]
   	sslVerify = false
+	emptyAuth = true
 
 [credential]
 	helper = "aws --version codecommit credential-helper "

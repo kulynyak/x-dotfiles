@@ -1,5 +1,0 @@
-{
-  "plugins": ["vue"],
-  "extends": ["standard", "plugin:vue/recommended", "prettier"],
-  "env": { "es6": true }
-}
