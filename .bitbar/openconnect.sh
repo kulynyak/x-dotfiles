@@ -23,6 +23,7 @@
 #osx-username ALL=(ALL) NOPASSWD: /usr/bin/killall -2 openconnect
 #osx-username ALL=(ALL) NOPASSWD: /sbin/route
 #osx-username ALL=(ALL) NOPASSWD: /usr/local/bin/vpn-slice
+#osx-username ALL=(ALL) NOPASSWD: /sbin/ifconfig
 # use sudo visudo -f /etc/sudoers for it
 
 # 2.) Make sure openconnect binary is located here:
