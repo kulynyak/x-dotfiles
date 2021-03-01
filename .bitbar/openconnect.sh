@@ -1,4 +1,4 @@
-#!/usr/local/bin/zsh
+#!/bin/zsh
 # Credit for original concept and initial work to: Jesse Jarzynka, Ventz Petkov
 
 #########################################################
@@ -24,7 +24,7 @@
 #osx-username ALL=(ALL) NOPASSWD: /sbin/route
 #osx-username ALL=(ALL) NOPASSWD: /usr/local/bin/vpn-slice
 #osx-username ALL=(ALL) NOPASSWD: /sbin/ifconfig
-# use sudo visudo -f /etc/sudoers for it
+# use sudo visudo -f /etc/sudoers.d/sudoers for it
 
 # 2.) Make sure openconnect binary is located here:
 #     (If you don't have it installed: "brew install openconnect")

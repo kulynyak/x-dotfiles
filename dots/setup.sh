@@ -140,13 +140,13 @@ if [ ! -d "$HOME/.zprezto" ]; then
 fi
 
 echo $'\nCheck zsh is your default shell'
-if ! grep -q /usr/local/bin/zsh /etc/shells; then
-  echo "adding /usr/local/bin/zsh to /etc/shells..."
-  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+if ! grep -q /bin/zsh /etc/shells; then
+  echo "adding /bin/zsh to /etc/shells..."
+  echo "/bin/zsh" | sudo tee -a /etc/shells
 fi
-if [ "=$(dscl . -read $HOME UserShell)=" != "=UserShell: /usr/local/bin/zsh=" ]; then
+if [ "=$(dscl . -read $HOME UserShell)=" != "=UserShell: /bin/zsh=" ]; then
   echo $'\nmake zsh your default shell'
-  chsh -s /usr/local/bin/zsh
+  chsh -s /bin/zsh
 fi
 
 echo $'\nConfigure links'
