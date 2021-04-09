@@ -30,8 +30,8 @@ window:
   # Window dimensions in character columns and lines
   # (changes require restart)
   dimensions:
-    columns: 209
-    lines: 61
+    columns: 196
+    lines: 58
 
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
@@ -220,7 +220,7 @@ cursor:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Underline
+  style: Block
   thickness: 0.14
   unfocused_hollow: true
 

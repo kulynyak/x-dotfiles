@@ -74,12 +74,12 @@ VPN_CREDS=$(security find-generic-password -wl "$KEYCHAIN_ITEM_NAME")
 # END-OF-USER-SETTINGS #
 #########################################################
 
-VPN_INTERFACE="utun99"
+VPN_INTERFACE="utun11"
 
 # Command to determine if VPN is connected or disconnected
 VPN_CONNECTED="/sbin/ifconfig | grep -A3 $VPN_INTERFACE | grep inet"
 # Command to run to disconnect VPN
-VPN_DISCONNECT_CMD="sudo killall -2 openconnect || sudo ifconfig "$VPN_INTERFACE" down"
+VPN_DISCONNECT_CMD="sudo killall -2 openconnect && sudo ifconfig $VPN_INTERFACE -alias"
 
 # GUI Prompt for your token/key (ex: Duo/Yubikey/Google Authenticator)
 function prompt_2fa_method() {
@@ -112,14 +112,20 @@ case "$1" in
 
         # Connect based on your 2FA selection (see: $PUSH_OR_PIN for options)
         # For anything else (non-duo) - you would provide your token (see: stoken)
-        # echo -e "${VPN_PASSWORD}\n$(prompt_2fa_method ${PUSH_OR_PIN})\n" | sudo "$VPN_EXECUTABLE" -u "$VPN_USERNAME" -i "$VPN_INTERFACE" "$VPN_HOST" &> /dev/null &
+        trash $HOME/tmp/vpn-slice.log
         echo -e "${VPN_PASSWORD}" | sudo "$VPN_EXECUTABLE" \
         --user="$VPN_USERNAME" \
-        --script="vpn-slice $DNS_L" \
+        --script="vpn-slice -K --verbose $DNS_L >>$HOME/tmp/vpn-slice.log 2>&1" \
         --authgroup="$VPN_AUTH_GROUP" \
         --passwd-on-stdin \
         -i "$VPN_INTERFACE" \
         "$VPN_HOST" &> /dev/null &
+        # echo -e "${VPN_PASSWORD}" | sudo "$VPN_EXECUTABLE" \
+        # --user="$VPN_USERNAME" \
+        # --authgroup="$VPN_AUTH_GROUP" \
+        # --passwd-on-stdin \
+        # -i "$VPN_INTERFACE" \
+        # "$VPN_HOST" &> /dev/null &
         # Wait for connection so menu item refreshes instantly
         until eval "$VPN_CONNECTED"; do sleep 1; done
         ;;
@@ -137,9 +143,9 @@ if [ -n "$(eval "$VPN_CONNECTED")" ]; then
     echo "Disconnect VPN | bash='$0' param1=disconnect terminal=false refresh=true"
     exit
 else
-    # echo "vpn🚫"
+    echo "vpn🚫"
     # Alternative icon -> but too similar to "connected"
-    echo "vpn🔓"
+    # echo "vpn🔓"
     echo '---'
     echo "Connect VPN | bash='$0' param1=connect terminal=false refresh=true"
     # For debugging!

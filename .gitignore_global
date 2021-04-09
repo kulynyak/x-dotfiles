@@ -29,7 +29,6 @@
 **/dependency-reduced-pom.xml
 **/jacoco.exec
 **/node_modules
-**/overlays
 **/package-lock.json
 **/smpfLog
 **/target
