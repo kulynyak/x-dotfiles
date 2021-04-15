@@ -74,7 +74,7 @@ VPN_CREDS=$(security find-generic-password -wl "$KEYCHAIN_ITEM_NAME")
 # END-OF-USER-SETTINGS #
 #########################################################
 
-VPN_INTERFACE="utun11"
+VPN_INTERFACE="utun20"
 
 # Command to determine if VPN is connected or disconnected
 VPN_CONNECTED="/sbin/ifconfig | grep -A3 $VPN_INTERFACE | grep inet"

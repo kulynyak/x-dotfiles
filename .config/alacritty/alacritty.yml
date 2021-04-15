@@ -107,8 +107,8 @@ colors:
     background: '#ffffff'
 
   cursor:
-    text: CellBackground
-    cursor: CellForeground
+    text: '#dddddd'
+    cursor: '#23fd00'
 
   # Normal colors
   normal:
@@ -160,7 +160,7 @@ bell:
   duration: 1
 
 # Background opacity
-background_opacity: 0.95
+background_opacity: 0.99
 
 # Mouse bindings
 #
@@ -220,7 +220,7 @@ cursor:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Block
+  style: Underline
   thickness: 0.14
   unfocused_hollow: true
 
