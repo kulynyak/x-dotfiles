@@ -12,8 +12,8 @@ tap "homebrew/services"
 tap "kak-lsp/kak-lsp"
 tap "kulynyak/repo"
 tap "mongodb/brew"
-tap "neovim/neovim"
 tap "sidaf/pentest"
+tap "tlk/imagemagick-x11"
 tap "universal-ctags/universal-ctags"
 brew "libpng"
 brew "gettext"
@@ -37,7 +37,7 @@ brew "coreutils"
 brew "cpputest"
 brew "curl"
 brew "discount"
-brew "docker", link: false
+brew "docker"
 brew "docker-compose"
 brew "docker-machine-driver-hyperkit"
 brew "editorconfig"
@@ -69,7 +69,6 @@ brew "httpie"
 brew "hub"
 brew "mysql-client"
 brew "hydra"
-brew "imagemagick"
 brew "jenv"
 brew "jq"
 brew "jump"
@@ -90,7 +89,6 @@ brew "minikube"
 brew "mitmproxy"
 brew "moreutils"
 brew "msgpack"
-brew "neovim", args: ["HEAD"]
 brew "nginx", restart_service: true
 brew "nikto"
 brew "nmap"
@@ -131,7 +129,6 @@ brew "trash"
 brew "tree"
 brew "urlview"
 brew "vcprompt"
-brew "vim"
 brew "vpn-slice"
 brew "wget"
 brew "xcproj"
@@ -198,10 +195,3 @@ cask "wechat"
 cask "whatsapp"
 cask "wkhtmltopdf"
 cask "zoom"
-mas "AdBlock", id: 1402042596
-mas "Canary Mail", id: 1236045954
-mas "Grammarly for Safari", id: 1462114288
-mas "iMovie", id: 408981434
-mas "Save to Pocket", id: 1477385213
-mas "Tab Space", id: 1473726602
-mas "Xcode", id: 497799835
